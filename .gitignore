@@ -2,3 +2,6 @@ __pycache__/
 migrations
 .vscode/
 env/
+secrets.py
+*gunicorn*
+static/
