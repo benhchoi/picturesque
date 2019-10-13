@@ -1,0 +1,27 @@
+{
+  "name": "picturesque",
+  "version": "1.0.0",
+  "description": "citation links: - initial server setup: <https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04> - setting up ssh keys: <https://confluence.atlassian.com/bitbucket/ssh-keys-935365775.html>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development --watch ./picturesque/frontend/src/index.js --output ./picturesque/frontend/static/frontend/main.js",
+    "build": "webpack --mode production ./picturesque/frontend/src/index.js --output ./picturesque/frontend/static/frontend/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/choibenjamin/picturesque.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/choibenjamin/picturesque#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9"
+  }
+}
