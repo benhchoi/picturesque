@@ -4,9 +4,11 @@ cffi==1.12.3
 cryptography==2.7
 Django==2.2.5
 django-rest-knox==4.1.0
+django-taggit==1.1.0
 djangorestframework==3.10.3
 gunicorn==19.9.0
 pep8==1.7.1
+Pillow==6.2.0
 psycopg2-binary==2.8.3
 pycodestyle==2.5.0
 pycparser==2.19
