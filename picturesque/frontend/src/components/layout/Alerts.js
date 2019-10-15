@@ -10,7 +10,7 @@ export class Alerts extends Component {
     };
 
     componentDidUpdate(prevProps) {
-        const { error, alert, message } = this.props
+        const { error, alert, message } = this.props;
         if (error !== prevProps.error) {
             alert.error("There is an error");
         }
