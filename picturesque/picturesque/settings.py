@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 TAGGIT_CASE_INSENSITIVE = True
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSSES': ('knox.auth.TokenAuthentication',)
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
 }
 
 MIDDLEWARE = [

@@ -8,6 +8,7 @@ export const createMessage = msg => {
   };
 };
 
+// return errors
 export const returnErrors = (msg, status) => {
   return {
     type: GET_ERRORS,

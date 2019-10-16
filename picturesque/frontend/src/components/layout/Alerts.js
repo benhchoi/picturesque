@@ -30,4 +30,9 @@ const mapStateToProps = state => ({
   message: state.messages
 });
 
-export default connect(mapStateToProps)(withAlert(Alerts));
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withAlert()(Alerts));

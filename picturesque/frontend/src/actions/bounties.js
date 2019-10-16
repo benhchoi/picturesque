@@ -1,4 +1,5 @@
 import axios from "axios";
+import { returnErrors } from "./messages";
 import { GET_BOUNTIES, DELETE_BOUNTY, ADD_BOUNTY } from "./types";
 
 // get bounties
@@ -11,7 +12,9 @@ export const getBounties = () => dispatch => {
         payload: res.data
       });
     })
-    .catch(err => console.log(err));
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
 // delete bounty
@@ -24,7 +27,9 @@ export const deleteBounty = id => dispatch => {
         payload: id
       });
     })
-    .catch(err => console.log(err));
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
 
 // add bounty
@@ -37,5 +42,7 @@ export const addBounty = bounty => dispatch => {
         payload: res.data
       });
     })
-    .catch(err => console.log(err));
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };
