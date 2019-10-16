@@ -1,6 +1,7 @@
 import axios from "axios";
 import { returnErrors } from "./messages";
 import { GET_BOUNTIES, DELETE_BOUNTY, ADD_BOUNTY } from "./types";
+import { tokenConfig } from "./auth";
 
 // get bounties
 export const getBounties = () => dispatch => {
@@ -18,9 +19,9 @@ export const getBounties = () => dispatch => {
 };
 
 // delete bounty
-export const deleteBounty = id => dispatch => {
+export const deleteBounty = id => (dispatch, getState) => {
   axios
-    .delete(`/api/bounties/${id}`)
+    .delete(`/api/bounties/${id}`, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: DELETE_BOUNTY,
@@ -33,9 +34,9 @@ export const deleteBounty = id => dispatch => {
 };
 
 // add bounty
-export const addBounty = bounty => dispatch => {
+export const addBounty = bounty => (dispatch, getState) => {
   axios
-    .post("/api/bounties", bounty)
+    .post("/api/bounties", bounty, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: ADD_BOUNTY,
