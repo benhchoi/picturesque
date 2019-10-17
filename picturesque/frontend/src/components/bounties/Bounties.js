@@ -15,9 +15,19 @@ export class Bounties extends Component {
 
   render() {
     return (
-      <Fragment>
-        <h1>Bounties</h1>
-      </Fragment>
+      <div className="container">
+        {this.props.bounties.map(bounty => (
+          <div className="row" key={bounty.id}>
+            <h4>{bounty.title}</h4>
+            <h6>posted by {bounty.user}</h6>
+            <div className="scrolling-wrapper">
+              {bounty.reference_arts.map(bounty_art => (
+                <div className="card"></div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     );
   }
 }
