@@ -15,13 +15,26 @@ export class Header extends Component {
 
     const authLinks = (
       <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-        <li className="nav-item">
-          <button
-            onClick={this.props.logout}
-            className="nav-link btn btn-info btn-sm text-light"
+        <li className="nav-item dropdown">
+          <a
+            className="nav-link dropdown-toggle"
+            data-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
           >
-            Logout
-          </button>
+            {user ? `${user.username}` : ""}
+          </a>
+          <div className="dropdown-menu">
+            <a className="dropdown-item" href="/u/:username/edit">
+              Edit Profile
+            </a>
+            <div className="dropdown-divider"></div>
+            <a className="dropdown-item" href="/logout">
+              Logout
+            </a>
+          </div>
         </li>
       </ul>
     );
@@ -42,20 +55,7 @@ export class Header extends Component {
           <a className="navbar-brand" href="#">
             Picturesque
           </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            {isAuthenticated ? authLinks : guestLinks}
-          </div>
+          {isAuthenticated ? authLinks : guestLinks}
         </div>
       </nav>
     );

@@ -11,11 +11,14 @@ import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
 import Header from "./layout/Header";
-import Dashboard from "./bounties/Dashboard";
 import Alerts from "./layout/Alerts";
 import Login from "./accounts/Login";
 import Register from "./accounts/Register";
 import PrivateRoute from "./common/PrivateRoute";
+import Home from "./common/Home";
+import Buy from "./common/Buy";
+import Sell from "./common/Sell";
+import Bounties from "./bounties/Bounties";
 
 import { Provider } from "react-redux";
 import store from "../store";
@@ -42,8 +45,10 @@ class App extends Component {
               <Alerts />
               <div className="container">
                 <Switch>
-                  <Route exact path="/" component={Dashboard} />
-                  <Route exact path="/bounties" component={Dashboard} />
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/buy" component={Buy} />
+                  <Route exact path="/sell" component={Sell} />
+                  <Route exact path="/bounties" component={Bounties} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
                 </Switch>
