@@ -11,3 +11,5 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGSITER_FAIL = "REGISTER_FAIL";
+export const UPLOAD_REFART = "UPLOAD_REFART";
+export const GET_REFART = "GET_REFART";

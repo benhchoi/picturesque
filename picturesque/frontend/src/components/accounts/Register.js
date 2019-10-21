@@ -50,7 +50,7 @@ export class Register extends Component {
                 className="form-control"
                 name="username"
                 onChange={this.onChange}
-                value={username}
+                value={this.state.username}
               />
             </div>
             <div className="form-group">
@@ -60,7 +60,7 @@ export class Register extends Component {
                 className="form-control"
                 name="email"
                 onChange={this.onChange}
-                value={email}
+                value={this.state.email}
               />
             </div>
             <div className="form-group">
@@ -70,7 +70,7 @@ export class Register extends Component {
                 className="form-control"
                 name="password"
                 onChange={this.onChange}
-                value={password}
+                value={this.state.password}
               />
             </div>
             <div className="form-group">
@@ -80,7 +80,7 @@ export class Register extends Component {
                 className="form-control"
                 name="password2"
                 onChange={this.onChange}
-                value={password2}
+                value={this.state.password2}
               />
             </div>
             <div className="form-group">

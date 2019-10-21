@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getBounties } from "../../actions/bounties";
+import { getBounties, timeSince } from "../../actions/bounties";
+import ScrollingImages from "../common/ScrollingImages";
 
 export class Bounties extends Component {
   static propTypes = {
@@ -17,13 +18,23 @@ export class Bounties extends Component {
     return (
       <div className="container">
         {this.props.bounties.map(bounty => (
-          <div className="row" key={bounty.id}>
-            <h4>{bounty.title}</h4>
-            <h6>posted by {bounty.user}</h6>
-            <div className="scrolling-wrapper">
-              {bounty.reference_arts.map(bounty_art => (
-                <div className="card"></div>
-              ))}
+          <div className="row m-2" key={bounty.id}>
+            <div className="col">
+              <h4>{bounty.title}</h4>
+              <p className="d-inline">
+                posted by {bounty.user.username} |{" "}
+                {timeSince(new Date(bounty.timestamp))} ago |{" "}
+              </p>
+              <p className="d-inline text-success">${bounty.price}</p>
+              <p className="d-inline">
+                {bounty.tags.length == 0 ? "" : ` | #${bounty.tags}`}
+              </p>
+              <ScrollingImages
+                images={bounty.reference_arts}
+                onClick={() => {
+                  return;
+                }}
+              />
             </div>
           </div>
         ))}

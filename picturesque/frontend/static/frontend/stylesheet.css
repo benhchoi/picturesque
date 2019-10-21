@@ -5,6 +5,17 @@
   white-space: nowrap;
 }
 
-.card {
+.scrolling-card {
   display: inline-block;
+  width: 33%;
+  height: auto;
+  cursor: pointer;
+}
+
+.scrolling-card:hover {
+  background: lightblue;
+}
+
+.selected {
+  background: deepskyblue;
 }

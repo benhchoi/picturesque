@@ -40,7 +40,7 @@ export class Login extends Component {
                 className="form-control"
                 name="username"
                 onChange={this.onChange}
-                value={username}
+                value={this.state.username}
               />
             </div>
             <div className="form-group">
@@ -50,7 +50,7 @@ export class Login extends Component {
                 className="form-control"
                 name="password"
                 onChange={this.onChange}
-                value={password}
+                value={this.state.password}
               />
             </div>
             <div className="form-group">

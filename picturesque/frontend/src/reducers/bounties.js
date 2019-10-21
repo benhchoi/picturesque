@@ -1,7 +1,14 @@
-import { GET_BOUNTIES, DELETE_BOUNTY, ADD_BOUNTY } from "../actions/types";
+import {
+  GET_BOUNTIES,
+  DELETE_BOUNTY,
+  ADD_BOUNTY,
+  UPLOAD_REFART,
+  GET_REFART
+} from "../actions/types";
 
 const initialState = {
-  bounties: []
+  bounties: [],
+  refArts: []
 };
 
 export default function(state = initialState, action) {
@@ -19,7 +26,17 @@ export default function(state = initialState, action) {
     case ADD_BOUNTY:
       return {
         ...state,
-        bounties: [...state.bounties, action.payload]
+        bounties: [action.payload, ...state.bounties]
+      };
+    case UPLOAD_REFART:
+      return {
+        ...state,
+        refArts: [action.payload, ...state.refArts]
+      };
+    case GET_REFART:
+      return {
+        ...state,
+        refArts: action.payload
       };
     default:
       return state;

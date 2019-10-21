@@ -37,11 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'frontend',
     'knox',
+    'taggit',
+    'taggit_serializer',
+
+    'frontend',
     'accounts',
     'bounties',
-    'taggit',
     'portfolios',
 ]
 

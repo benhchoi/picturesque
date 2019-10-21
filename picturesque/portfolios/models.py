@@ -4,7 +4,7 @@ from taggit.managers import TaggableManager
 
 
 def find_path(instance, filename):
-    return f'u/{instance.user.username}/{filename}'
+    return f'u/{instance.user.username}/artwork/{filename}'
 
 
 class Artwork(models.Model):

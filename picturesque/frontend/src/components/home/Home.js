@@ -27,6 +27,13 @@ export default class Home extends Component {
           </div>
         </div>
         <div className="row">
+          <div className="col">
+            <Link to="/bounties">
+              <p className="text-center">Actually, I'd just like to browse</p>
+            </Link>
+          </div>
+        </div>
+        <div className="row">
           <div className="col"></div>
         </div>
       </div>
