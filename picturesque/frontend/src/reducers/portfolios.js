@@ -3,12 +3,14 @@ import {
   DELETE_PORTFOLIO,
   ADD_PORTFOLIO,
   UPLOAD_ARTWORK,
-  GET_ARTWORK
+  GET_ARTWORK,
+  GET_PORTFOLIO
 } from "../actions/types";
 
 const initialState = {
   portfolios: [],
-  artworks: []
+  artworks: [],
+  portfolio: null
 };
 
 export default function(state = initialState, action) {
@@ -34,6 +36,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         artworks: action.payload
+      };
+    case GET_PORTFOLIO:
+      return {
+        ...state,
+        portfolio: action.payload
       };
     case ADD_PORTFOLIO:
     default:

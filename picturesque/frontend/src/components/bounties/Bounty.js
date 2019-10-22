@@ -59,7 +59,7 @@ export class Bounty extends Component {
                 />
               </div>
               <div className="col-7">
-                <p className="text-center">{refArt.description}</p>
+                <p className="text-center font-italic">{refArt.description}</p>
               </div>
             </div>
           );

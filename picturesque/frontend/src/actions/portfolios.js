@@ -5,7 +5,8 @@ import {
   DELETE_PORTFOLIO,
   ADD_PORTFOLIO,
   UPLOAD_ARTWORK,
-  GET_ARTWORK
+  GET_ARTWORK,
+  GET_PORTFOLIO
 } from "./types";
 import { tokenConfig } from "./auth";
 
@@ -80,4 +81,19 @@ export const addPortfolio = portfolio => (dispatch, getState) => {
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
+};
+
+// get portfolio
+export const getPortfolio = id => dispatch => {
+  axios
+    .get(`/api/portfolios/${id}/`)
+    .then(res => {
+      dispatch({
+        type: GET_PORTFOLIO,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };

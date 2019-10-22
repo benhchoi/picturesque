@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getPortfolios } from "../../actions/portfolios";
 import { timeSince } from "../../actions/utility";
 import ScrollingImages from "../common/ScrollingImages";
+import { Link } from "react-router-dom";
 
 export class Portfolios extends Component {
   static propTypes = {
@@ -21,7 +22,11 @@ export class Portfolios extends Component {
         {this.props.portfolios.map(portfolio => (
           <div className="row m-2" key={portfolio.id}>
             <div className="col">
-              <h4>{portfolio.title}</h4>
+              <h4>
+                <Link to={`/portfolios/view/${portfolio.id}`}>
+                  {portfolio.title}
+                </Link>
+              </h4>
               <p className="d-inline">
                 posted by {portfolio.user.username} |{" "}
                 {timeSince(new Date(portfolio.timestamp))} ago |{" "}
