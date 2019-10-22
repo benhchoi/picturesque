@@ -15,6 +15,8 @@ import Buy from "./home/Buy";
 import Sell from "./home/Sell";
 import Bounties from "./bounties/Bounties";
 import CreateBounty from "./bounties/CreateBounty";
+import Portfolios from "./portfolios/Portfolios";
+import CreatePortfolio from "./portfolios/CreatePortfolio";
 
 import { Provider } from "react-redux";
 import store from "../store";
@@ -42,13 +44,19 @@ class App extends Component {
               <div className="container">
                 <Switch>
                   <Route exact path="/" component={Home} />
-                  <PrivateRoute exact path="/buy" component={Buy} />
-                  <PrivateRoute exact path="/sell" component={Sell} />
-                  <PrivateRoute exact path="/bounties" component={Bounties} />
+                  <Route exact path="/buy" component={Buy} />
+                  <Route exact path="/sell" component={Sell} />
+                  <Route exact path="/bounties" component={Bounties} />
                   <PrivateRoute
                     exact
                     path="/bounties/create"
                     component={CreateBounty}
+                  />
+                  <Route exact path="/portfolios" component={Portfolios} />
+                  <PrivateRoute
+                    exact
+                    path="/portfolios/create"
+                    component={CreatePortfolio}
                   />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />

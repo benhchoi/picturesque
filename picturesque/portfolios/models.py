@@ -9,6 +9,7 @@ def find_path(instance, filename):
 
 class Artwork(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name="artworks",
                              on_delete=models.CASCADE)
     image = models.ImageField(upload_to=find_path)
     price = models.PositiveSmallIntegerField(null=True, blank=True)
@@ -17,6 +18,7 @@ class Artwork(models.Model):
 
 class Portfolio(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name="portfolios",
                              on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField()

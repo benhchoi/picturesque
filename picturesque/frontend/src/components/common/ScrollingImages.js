@@ -8,6 +8,14 @@ export default class ScrollingImages extends Component {
   };
 
   render() {
+    if (this.props.images.length == 0) {
+      return (
+        <div className="scrolling-wrapper border m-2 p-2">
+          <p className="text-center">Your pictures will appear here</p>
+        </div>
+      );
+    }
+
     return (
       <div className="scrolling-wrapper border m-2">
         {this.props.images.map(image => (

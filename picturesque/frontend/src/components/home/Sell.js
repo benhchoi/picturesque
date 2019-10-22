@@ -20,7 +20,7 @@ export default class Sell extends Component {
           </div>
           <div className="col">
             <div className="jumbotron">
-              <Link to="/bounties/create">
+              <Link to="/portfolios/create">
                 <h2 className="text-center">Create a portfolio</h2>
               </Link>
             </div>

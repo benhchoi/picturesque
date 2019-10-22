@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import UploadModal from "./UploadModal";
 import ScrollingImages from "../common/ScrollingImages";
-import { getRefArt, addBounty } from "../../actions/bounties";
+import { getArtwork, addPortfolio } from "../../actions/portfolios";
 import { makeTagsArray } from "../../actions/utility";
 
-export class CreateBounty extends Component {
+export class CreatePortfolio extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
-    refArts: PropTypes.array.isRequired,
-    getRefArt: PropTypes.func.isRequired,
-    addBounty: PropTypes.func.isRequired
+    artworks: PropTypes.array.isRequired,
+    getArtwork: PropTypes.func.isRequired,
+    addPortfolio: PropTypes.func.isRequired
   };
 
   state = {
@@ -20,11 +20,11 @@ export class CreateBounty extends Component {
     title: "",
     description: "",
     tags: "",
-    price: ""
+    rate: ""
   };
 
   componentDidMount() {
-    this.props.getRefArt();
+    this.props.getArtwork();
   }
 
   clickImage = e => {
@@ -40,12 +40,12 @@ export class CreateBounty extends Component {
 
   onPublish = e => {
     e.preventDefault();
-    const { title, description, price, selected } = this.state;
+    const { title, description, rate, selected } = this.state;
     const user = this.props.user.id;
     const tags = makeTagsArray(this.state.tags);
-    const reference_arts = [...selected].map(Number);
-    const bounty = { user, title, description, tags, price, reference_arts };
-    this.props.addBounty(bounty);
+    const artworks = [...selected].map(Number);
+    const portfolio = { user, title, description, tags, rate, artworks };
+    this.props.addPortfolio(portfolio);
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -53,36 +53,37 @@ export class CreateBounty extends Component {
   render() {
     return (
       <div className="container">
-        <h2>Let us help you find the perfect artist for your needs!</h2>
+        <h2>
+          Let us help you build your portfolio so you can attract buyers to your
+          art!
+        </h2>
         <form onSubmit={this.onPublish}>
           <div className="form-group">
-            <label>First, give a name to your bounty:</label>
+            <label>First, give a name to your portfolio:</label>
             <input
               type="text"
               className="form-control"
               name="title"
-              placeholder="Pencil sketch on paper..."
+              placeholder="Oil landscapes ..."
               onChange={this.onChange}
               value={this.state.title}
             />
           </div>
           <div className="form-group">
-            <label>
-              Provide a more detailed description of what you're looking for:
-            </label>
+            <label>Provide a more detailed description of your work:</label>
             <textarea
               name="description"
               rows="5"
               className="form-control"
-              placeholder="Looking for an artist to make a black and white pencil sketch of my dog ..."
+              placeholder="I specialize in creating oil on canvas paintings ..."
               onChange={this.onChange}
               value={this.state.description}
             ></textarea>
           </div>
           <div className="form-group">
             <label>
-              Help artists get a feel for what you're looking for with some
-              reference art:
+              Choose which of your works you'd like to include in this
+              portfolio:
             </label>
             <br></br>
             <button
@@ -95,25 +96,23 @@ export class CreateBounty extends Component {
               Upload
             </button>
             <ScrollingImages
-              images={this.props.refArts}
+              images={this.props.artworks}
               onClick={this.clickImage}
             />
           </div>
           <div className="form-group">
-            <label>
-              Now let's add some tags to describe what you're looking for:
-            </label>
+            <label>Now let's add some tags to describe your work:</label>
             <input
               type="text"
               className="form-control"
               name="tags"
-              placeholder="pencil, black and white, sketch, paper, ..."
+              placeholder="oil, canvas, landscapes, ..."
               onChange={this.onChange}
               value={this.state.tags}
             />
           </div>
           <div className="form-group">
-            <label>Around how much are you willing to spend?</label>
+            <label>Around how much do you charge for commissions?</label>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
                 <span className="input-group-text">$</span>
@@ -122,12 +121,12 @@ export class CreateBounty extends Component {
                 type="number"
                 min="0"
                 max="32767"
-                name="price"
+                name="rate"
                 className="form-control"
                 placeholder="20"
                 aria-label="Amount (to the nearest dollar)"
                 onChange={this.onChange}
-                value={this.state.price}
+                value={this.state.rate}
               />
               <div className="input-group-append">
                 <span className="input-group-text">.00</span>
@@ -148,12 +147,12 @@ export class CreateBounty extends Component {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  refArts: state.bounties.refArts
+  artworks: state.portfolios.artworks
 });
 
-const mapDispatchToProps = { getRefArt, addBounty };
+const mapDispatchToProps = { getArtwork, addPortfolio };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreateBounty);
+)(CreatePortfolio);

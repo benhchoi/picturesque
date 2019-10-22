@@ -1,41 +1,43 @@
 from rest_framework import serializers
-from .models import Bounty, ReferenceArt
+from .models import Portfolio, Artwork
 from accounts.serializers import UserSerializer
 from taggit_serializer.serializers import (
     TagListSerializerField, TaggitSerializer)
 
 
-class ReferenceArtSerializer(serializers.ModelSerializer):
+class ArtworkSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ReferenceArt
+        model = Artwork
         fields = '__all__'
 
 
-class BountyReadSerializer(TaggitSerializer, serializers.ModelSerializer):
+class PortfolioReadSerializer(TaggitSerializer, serializers.ModelSerializer):
     user = UserSerializer()
     tags = TagListSerializerField()
-    reference_arts = ReferenceArtSerializer(many=True)
+    artworks = ArtworkSerializer(many=True)
 
     class Meta:
-        model = Bounty
+        model = Portfolio
         fields = '__all__'
 
     @staticmethod
     def setup_eager_loading(queryset):
+        """ Perform necessary eager loading of data. """
         queryset = queryset.select_related('user')
-        queryset = queryset.prefetch_related('tags', 'reference_arts')
+        queryset = queryset.prefetch_related('tags', 'artworks')
         return queryset
 
 
-class BountySerializer(TaggitSerializer, serializers.ModelSerializer):
+class PortfolioSerializer(TaggitSerializer, serializers.ModelSerializer):
     tags = TagListSerializerField()
 
     class Meta:
-        model = Bounty
+        model = Portfolio
         fields = '__all__'
 
     @staticmethod
     def setup_eager_loading(queryset):
+        """ Perform necessary eager loading of data. """
         queryset = queryset.select_related('user')
-        queryset = queryset.prefetch_related('tags', 'reference_arts')
+        queryset = queryset.prefetch_related('tags', 'artworks')
         return queryset

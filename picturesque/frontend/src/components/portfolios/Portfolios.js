@@ -1,35 +1,35 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getBounties } from "../../actions/bounties";
+import { getPortfolios } from "../../actions/portfolios";
 import { timeSince } from "../../actions/utility";
 import ScrollingImages from "../common/ScrollingImages";
 
-export class Bounties extends Component {
+export class Portfolios extends Component {
   static propTypes = {
-    bounties: PropTypes.array.isRequired,
-    getBounties: PropTypes.func.isRequired
+    portfolios: PropTypes.array.isRequired,
+    getPortfolios: PropTypes.func.isRequired
   };
 
   componentDidMount() {
-    this.props.getBounties();
+    this.props.getPortfolios();
   }
 
   render() {
     return (
       <div className="container">
-        {this.props.bounties.map(bounty => (
-          <div className="row m-2" key={bounty.id}>
+        {this.props.portfolios.map(portfolio => (
+          <div className="row m-2" key={portfolio.id}>
             <div className="col">
-              <h4>{bounty.title}</h4>
+              <h4>{portfolio.title}</h4>
               <p className="d-inline">
-                posted by {bounty.user.username} |{" "}
-                {timeSince(new Date(bounty.timestamp))} ago |{" "}
+                posted by {portfolio.user.username} |{" "}
+                {timeSince(new Date(portfolio.timestamp))} ago |{" "}
               </p>
-              <p className="d-inline text-success">${bounty.price}</p>
-              {bounty.tags.length == 0
+              <p className="d-inline text-success">${portfolio.rate}</p>
+              {portfolio.tags.length == 0
                 ? ""
-                : bounty.tags.map(tag => {
+                : portfolio.tags.map(tag => {
                     return (
                       <div key={tag} className="d-inline">
                         <p className="d-inline"> | </p>
@@ -38,7 +38,7 @@ export class Bounties extends Component {
                     );
                   })}
               <ScrollingImages
-                images={bounty.reference_arts}
+                images={portfolio.artworks}
                 onClick={() => {
                   return;
                 }}
@@ -52,12 +52,12 @@ export class Bounties extends Component {
 }
 
 const mapStateToProps = state => ({
-  bounties: state.bounties.bounties
+  portfolios: state.portfolios.portfolios
 });
 
-const mapDispatchToProps = { getBounties };
+const mapDispatchToProps = { getPortfolios };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Bounties);
+)(Portfolios);

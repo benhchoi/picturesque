@@ -12,3 +12,4 @@ citation links:
 - uploading images with react: <https://www.academind.com/learn/react/snippets/image-upload/>
 - using emmet: <https://www.sitepoint.com/faster-workflow-mastering-emmet-part-1/>
 - time ago function: <https://stackoverflow.com/questions/6108819/javascript-timestamp-to-relative-time-eg-2-seconds-ago-one-week-ago-etc-best>
+- dealing with drf nested serializers: <https://stackoverflow.com/questions/41312558/django-rest-framework-post-nested-objects>
