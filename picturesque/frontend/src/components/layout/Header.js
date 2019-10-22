@@ -27,7 +27,7 @@ export class Header extends Component {
             {user ? `${user.username}` : ""}
           </a>
           <div className="dropdown-menu">
-            <a
+            {/* <a
               className="dropdown-item"
               href={user ? `/u/${user.username}/bounties` : "#"}
             >
@@ -39,7 +39,7 @@ export class Header extends Component {
             >
               My Portfolios
             </a>
-            <div className="dropdown-divider"></div>
+            <div className="dropdown-divider"></div> */}
             <button className="btn dropdown-item" onClick={this.props.logout}>
               Logout
             </button>
