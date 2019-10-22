@@ -40,6 +40,9 @@ export const login = (username, password) => dispatch => {
     }
   };
 
+  // make username case insensitive
+  username = username.toLowerCase();
+
   // request body
   const body = JSON.stringify({ username, password });
 
@@ -67,6 +70,10 @@ export const register = ({ username, email, password }) => dispatch => {
       "Content-Type": "application/json"
     }
   };
+
+  // make username and email case insensitive
+  username = username.toLowerCase();
+  email = email.toLowerCase();
 
   // request body
   const body = JSON.stringify({ username, email, password });
