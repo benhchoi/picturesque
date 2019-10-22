@@ -29,9 +29,15 @@ export class Header extends Component {
           <div className="dropdown-menu">
             <a
               className="dropdown-item"
-              href={user ? `/u/${user.username}/edit` : "#"}
+              href={user ? `/u/${user.username}/bounties` : "#"}
             >
-              Edit Profile
+              My Bounties
+            </a>
+            <a
+              className="dropdown-item"
+              href={user ? `/u/${user.username}/portfolios` : "#"}
+            >
+              My Portfolios
             </a>
             <div className="dropdown-divider"></div>
             <button className="btn dropdown-item" onClick={this.props.logout}>
