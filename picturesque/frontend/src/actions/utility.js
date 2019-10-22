@@ -12,12 +12,12 @@ export const timeSince = timestamp => {
     return parseInt(secondsPast / 3600) + "h";
   }
   if (secondsPast > 86400) {
-    day = timestamp.getDate();
-    month = timestamp
+    const day = timestamp.getDate();
+    const month = timestamp
       .toDateString()
       .match(/ [a-zA-Z]*/)[0]
       .replace(" ", "");
-    year =
+    const year =
       timestamp.getFullYear() == now.getFullYear()
         ? ""
         : " " + timestamp.getFullYear();
