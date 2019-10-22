@@ -21,7 +21,9 @@ export default class Sell extends Component {
           <div className="col">
             <div className="jumbotron">
               <Link to="/portfolios/create">
-                <h2 className="text-center">Create a portfolio</h2>
+                <h2 className="text-center">
+                  Create a personalized portfolio to let clients come to you
+                </h2>
               </Link>
             </div>
           </div>

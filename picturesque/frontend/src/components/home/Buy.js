@@ -21,7 +21,10 @@ export default class Buy extends Component {
           <div className="col">
             <div className="jumbotron">
               <Link to="/bounties/create">
-                <h2 className="text-center">Create a bounty</h2>
+                <h2 className="text-center">
+                  Create a personalized art-wanted bounty to let artists come to
+                  you
+                </h2>
               </Link>
             </div>
           </div>

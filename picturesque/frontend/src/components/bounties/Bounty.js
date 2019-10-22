@@ -64,6 +64,16 @@ export class Bounty extends Component {
             </div>
           );
         })}
+        <div className="row p-2 border-top">
+          <div className="col">
+            <a
+              className="btn btn-primary"
+              href={`mailto: ${this.props.bounty.user.email}`}
+            >
+              Contact
+            </a>
+          </div>
+        </div>
       </div>
     );
   }

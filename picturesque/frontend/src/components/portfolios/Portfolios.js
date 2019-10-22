@@ -20,7 +20,7 @@ export class Portfolios extends Component {
     return (
       <div className="container">
         {this.props.portfolios.map(portfolio => (
-          <div className="row m-2" key={portfolio.id}>
+          <div className="row p-2 border-bottom" key={portfolio.id}>
             <div className="col">
               <h4>
                 <Link to={`/portfolios/view/${portfolio.id}`}>

@@ -20,7 +20,7 @@ export class Bounties extends Component {
     return (
       <div className="container">
         {this.props.bounties.map(bounty => (
-          <div className="row m-2" key={bounty.id}>
+          <div className="row p-2 border-bottom" key={bounty.id}>
             <div className="col">
               <h4>
                 <Link to={`/bounties/view/${bounty.id}`}>{bounty.title}</Link>
