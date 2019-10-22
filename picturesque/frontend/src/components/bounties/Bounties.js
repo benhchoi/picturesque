@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getBounties } from "../../actions/bounties";
 import { timeSince } from "../../actions/utility";
 import ScrollingImages from "../common/ScrollingImages";
+import { Link } from "react-router-dom";
 
 export class Bounties extends Component {
   static propTypes = {
@@ -21,7 +22,9 @@ export class Bounties extends Component {
         {this.props.bounties.map(bounty => (
           <div className="row m-2" key={bounty.id}>
             <div className="col">
-              <h4>{bounty.title}</h4>
+              <h4>
+                <Link to={`/bounties/view/${bounty.id}`}>{bounty.title}</Link>
+              </h4>
               <p className="d-inline">
                 posted by {bounty.user.username} |{" "}
                 {timeSince(new Date(bounty.timestamp))} ago |{" "}

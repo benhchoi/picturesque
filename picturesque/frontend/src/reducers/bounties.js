@@ -3,12 +3,14 @@ import {
   DELETE_BOUNTY,
   ADD_BOUNTY,
   UPLOAD_REFART,
-  GET_REFART
+  GET_REFART,
+  GET_BOUNTY
 } from "../actions/types";
 
 const initialState = {
   bounties: [],
-  refArts: []
+  refArts: [],
+  bounty: null
 };
 
 export default function(state = initialState, action) {
@@ -32,6 +34,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         refArts: action.payload
+      };
+    case GET_BOUNTY:
+      return {
+        ...state,
+        bounty: action.payload
       };
     case ADD_BOUNTY:
     default:

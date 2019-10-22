@@ -5,7 +5,8 @@ import {
   DELETE_BOUNTY,
   ADD_BOUNTY,
   UPLOAD_REFART,
-  GET_REFART
+  GET_REFART,
+  GET_BOUNTY
 } from "./types";
 import { tokenConfig } from "./auth";
 
@@ -81,4 +82,19 @@ export const addBounty = bounty => (dispatch, getState) => {
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
+};
+
+// get bounty
+export const getBounty = id => dispatch => {
+  axios
+    .get(`/api/bounties/${id}/`)
+    .then(res => {
+      dispatch({
+        type: GET_BOUNTY,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
