@@ -25,7 +25,7 @@ export class Bounty extends Component {
             <h2>{this.props.bounty.title}</h2>
             <p className="d-inline">
               posted by {this.props.bounty.user.username} |{" "}
-              {timeSince(new Date(this.props.bounty.timestamp))} ago |{" "}
+              {timeSince(new Date(this.props.bounty.timestamp))} |{" "}
             </p>
             <p className="d-inline text-success">${this.props.bounty.price}</p>
             {this.props.bounty.tags.length == 0

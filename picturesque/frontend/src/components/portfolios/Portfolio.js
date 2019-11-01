@@ -25,7 +25,7 @@ export class Portfolio extends Component {
             <h2>{this.props.portfolio.title}</h2>
             <p className="d-inline">
               posted by {this.props.portfolio.user.username} |{" "}
-              {timeSince(new Date(this.props.portfolio.timestamp))} ago |{" "}
+              {timeSince(new Date(this.props.portfolio.timestamp))} |{" "}
             </p>
             <p className="d-inline text-success">
               ${this.props.portfolio.rate}

@@ -1,17 +1,14 @@
 // calculate time since a timestamp
 export const timeSince = timestamp => {
-  const now = new Date(),
-    secondsPast = (now.getTime() - timestamp.getTime()) / 1000;
+  const now = new Date();
+  const secondsPast = (now.getTime() - timestamp.getTime()) / 1000;
   if (secondsPast < 60) {
-    return parseInt(secondsPast) + "s";
-  }
-  if (secondsPast < 3600) {
-    return parseInt(secondsPast / 60) + "m";
-  }
-  if (secondsPast <= 86400) {
-    return parseInt(secondsPast / 3600) + "h";
-  }
-  if (secondsPast > 86400) {
+    return parseInt(secondsPast) + "s ago";
+  } else if (secondsPast < 3600) {
+    return parseInt(secondsPast / 60) + "m ago";
+  } else if (secondsPast <= 86400) {
+    return parseInt(secondsPast / 3600) + "h ago";
+  } else {
     const day = timestamp.getDate();
     const month = timestamp
       .toDateString()

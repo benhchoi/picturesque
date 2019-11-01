@@ -29,7 +29,7 @@ export class Portfolios extends Component {
               </h4>
               <p className="d-inline">
                 posted by {portfolio.user.username} |{" "}
-                {timeSince(new Date(portfolio.timestamp))} ago |{" "}
+                {timeSince(new Date(portfolio.timestamp))} |{" "}
               </p>
               <p className="d-inline text-success">${portfolio.rate}</p>
               {portfolio.tags.length == 0

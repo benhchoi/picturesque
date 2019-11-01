@@ -27,7 +27,7 @@ export class Bounties extends Component {
               </h4>
               <p className="d-inline">
                 posted by {bounty.user.username} |{" "}
-                {timeSince(new Date(bounty.timestamp))} ago |{" "}
+                {timeSince(new Date(bounty.timestamp))} |{" "}
               </p>
               <p className="d-inline text-success">${bounty.price}</p>
               {bounty.tags.length == 0

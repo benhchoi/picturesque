@@ -36,11 +36,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # apps from pip
     'rest_framework',
     'knox',
     'taggit',
     'taggit_serializer',
 
+    # custom apps
     'frontend',
     'accounts',
     'bounties',
