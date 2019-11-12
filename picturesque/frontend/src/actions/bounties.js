@@ -134,7 +134,7 @@ export const editBounty = bounty => (dispatch, getState) => {
 // get my bounties
 export const getMyBounties = () => (dispatch, getState) => {
   axios
-    .get("/api/bounties/", tokenConfig(getState))
+    .get("/api/mybounties/", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_MY_BOUNTIES,

@@ -7,7 +7,7 @@ from .serializers import (PortfolioSerializer, PortfolioReadSerializer,
 # artwork viewset
 class ArtworkViewSet(viewsets.ModelViewSet):
     permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly
+        permissions.IsAuthenticated
     ]
     serializer_class = ArtworkSerializer
 
@@ -21,8 +21,6 @@ class PortfolioViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticatedOrReadOnly
     ]
 
-    serializer_class = PortfolioReadSerializer
-
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return PortfolioReadSerializer
@@ -31,5 +29,18 @@ class PortfolioViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Portfolio.objects.all()
+        queryset = self.get_serializer_class().setup_eager_loading(queryset)
+        return queryset
+
+
+# my portfolios view set
+class MyPortfoliosViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = PortfolioReadSerializer
+
+    def get_queryset(self):
+        queryset = self.request.user.portfolios.all()
         queryset = self.get_serializer_class().setup_eager_loading(queryset)
         return queryset
