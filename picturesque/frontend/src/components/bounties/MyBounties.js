@@ -29,7 +29,15 @@ export class MyBounties extends Component {
           >
             <div className="col">
               <h4>
-                <Link to={`/bounties/view/${bounty.id}`}>{bounty.title}</Link>
+                {bounty.completed ? (
+                  <del>
+                    <Link to={`/bounties/view/${bounty.id}`}>
+                      {bounty.title}
+                    </Link>
+                  </del>
+                ) : (
+                  <Link to={`/bounties/view/${bounty.id}`}>{bounty.title}</Link>
+                )}
               </h4>
             </div>
           </div>

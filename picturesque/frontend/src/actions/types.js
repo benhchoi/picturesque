@@ -16,6 +16,8 @@ export const ADD_PORTFOLIO = "ADD_PORTFOLIO";
 export const GET_PORTFOLIO = "GET_PORTFOLIO";
 export const UPLOAD_ARTWORK = "UPLOAD_ARTWORK";
 export const GET_ARTWORK = "GET_ARTWORK";
+export const GET_ARTWORKS = "GET_ARTWORKS";
+export const EDIT_PORTFOLIO = "EDIT_PORTFOLIO";
 export const GET_MY_PORTFOLIOS = "GET_MY_PORTFOLIOS";
 
 // auth related stuff
@@ -31,3 +33,7 @@ export const REGSITER_FAIL = "REGISTER_FAIL";
 // err and message related stuff
 export const GET_ERRORS = "GET_ERRORS";
 export const CREATE_MESSAGE = "CREATE_MESSAGE";
+
+// favorites related stuff
+export const GET_FAVORITES = "GET_FAVORITES";
+export const UPDATE_FAVORITES = "UPDATE_FAVORITES";

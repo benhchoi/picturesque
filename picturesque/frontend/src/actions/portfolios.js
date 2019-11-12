@@ -6,8 +6,10 @@ import {
   ADD_PORTFOLIO,
   UPLOAD_ARTWORK,
   GET_ARTWORK,
+  GET_ARTWORKS,
   GET_PORTFOLIO,
-  GET_MY_PORTFOLIOS
+  GET_MY_PORTFOLIOS,
+  EDIT_PORTFOLIO
 } from "./types";
 import { tokenConfig } from "./auth";
 
@@ -26,10 +28,25 @@ export const uploadArtwork = artwork => (dispatch, getState) => {
     );
 };
 
-// get artwork
-export const getArtwork = () => (dispatch, getState) => {
+// get artworks
+export const getArtworks = () => (dispatch, getState) => {
   axios
     .get("/api/artworks/", tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: GET_ARTWORKS,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+// get artwork
+export const getArtwork = id => dispatch => {
+  axios
+    .get(`/api/artworks/${id}`)
     .then(res => {
       dispatch({
         type: GET_ARTWORK,
@@ -76,8 +93,11 @@ export const addPortfolio = portfolio => (dispatch, getState) => {
   axios
     .post("/api/portfolios/", portfolio, tokenConfig(getState))
     .then(res => {
-      dispatch({ type: ADD_PORTFOLIO });
-      dispatch(getPortfolios());
+      dispatch({
+        type: ADD_PORTFOLIO,
+        payload: res.data
+      });
+      dispatch(getPortfolio(res.data.id));
     })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -102,12 +122,28 @@ export const getPortfolio = id => dispatch => {
 // get my portfolios
 export const getMyPortfolios = () => (dispatch, getState) => {
   axios
-    .get(`/api/portfolios/`, tokenConfig(getState))
+    .get(`/api/myportfolios/`, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_MY_PORTFOLIOS,
         payload: res.data
       });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+// edit portfolio
+export const editPortfolio = portfolio => (dispatch, getState) => {
+  axios
+    .patch(`/api/portfolios/${portfolio.id}/`, portfolio, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: EDIT_PORTFOLIO,
+        payload: res.data
+      });
+      dispatch(getPortfolio(portfolio.id));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

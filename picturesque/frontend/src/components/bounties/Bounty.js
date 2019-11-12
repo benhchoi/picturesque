@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getBounty, deleteBounty, editBounty } from "../../actions/bounties";
 import { timeSince } from "../../actions/utility";
 import { Link, Redirect } from "react-router-dom";
-import RefArtViewModal from "./RefArtViewModal";
+import ViewImageModal from "../common/ViewImageModal";
 
 export class Bounty extends Component {
   static propTypes = {
@@ -53,7 +53,7 @@ export class Bounty extends Component {
     }
 
     if (this.props.bounty == null) {
-      return <p>No such bounty exists.</p>;
+      return <p>No such bounty exists</p>;
     }
 
     const { isAuthenticated, user } = this.props.auth;
@@ -110,7 +110,7 @@ export class Bounty extends Component {
 
     return (
       <div className="container">
-        <RefArtViewModal
+        <ViewImageModal
           id={this.state.viewModal}
           image={this.state.imageSrc}
           description={this.state.imageDesc}

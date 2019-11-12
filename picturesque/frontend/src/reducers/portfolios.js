@@ -4,14 +4,17 @@ import {
   ADD_PORTFOLIO,
   UPLOAD_ARTWORK,
   GET_ARTWORK,
+  GET_ARTWORKS,
   GET_PORTFOLIO,
-  GET_MY_PORTFOLIOS
+  GET_MY_PORTFOLIOS,
+  EDIT_PORTFOLIO
 } from "../actions/types";
 
 const initialState = {
   portfolios: [],
   artworks: [],
-  portfolio: null
+  portfolio: null,
+  artwork: null
 };
 
 export default function(state = initialState, action) {
@@ -27,17 +30,23 @@ export default function(state = initialState, action) {
         ...state,
         portfolios: state.portfolios.filter(
           portfolio => portfolio.id !== action.payload
-        )
+        ),
+        portfolio: null
       };
     case UPLOAD_ARTWORK:
       return {
         ...state,
         artworks: [action.payload, ...state.artworks]
       };
-    case GET_ARTWORK:
+    case GET_ARTWORKS:
       return {
         ...state,
         artworks: action.payload
+      };
+    case GET_ARTWORK:
+      return {
+        ...state,
+        artwork: action.payload
       };
     case GET_PORTFOLIO:
       return {
@@ -45,6 +54,7 @@ export default function(state = initialState, action) {
         portfolio: action.payload
       };
     case ADD_PORTFOLIO:
+    case EDIT_PORTFOLIO:
     default:
       return state;
   }

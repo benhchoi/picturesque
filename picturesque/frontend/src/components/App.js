@@ -21,6 +21,7 @@ import MyBounties from "./bounties/MyBounties";
 import Portfolios from "./portfolios/Portfolios";
 import CreatePortfolio from "./portfolios/CreatePortfolio";
 import Portfolio from "./portfolios/Portfolio";
+import EditPortfolio from "./portfolios/EditPortfolio";
 import MyPortfolios from "./portfolios/MyPortfolios";
 
 import { Provider } from "react-redux";
@@ -73,6 +74,11 @@ class App extends Component {
                     exact
                     path="/portfolios/create"
                     component={CreatePortfolio}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/portfolios/edit/:id"
+                    component={EditPortfolio}
                   />
                   <Route
                     exact

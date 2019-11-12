@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getBounties } from "../../actions/bounties";
 import { timeSince } from "../../actions/utility";
 import ScrollingImages from "../common/ScrollingImages";
-import RefArtViewModal from "./RefArtViewModal";
+import ViewImageModal from "../common/ViewImageModal";
 import { Link } from "react-router-dom";
 
 export class Bounties extends Component {
@@ -34,7 +34,7 @@ export class Bounties extends Component {
   render() {
     return (
       <div className="container">
-        <RefArtViewModal
+        <ViewImageModal
           id={this.state.viewModal}
           image={this.state.imageSrc}
           description={this.state.imageDesc}

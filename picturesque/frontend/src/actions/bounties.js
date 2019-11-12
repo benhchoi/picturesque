@@ -93,7 +93,11 @@ export const addBounty = bounty => (dispatch, getState) => {
   axios
     .post("/api/bounties/", bounty, tokenConfig(getState))
     .then(res => {
-      dispatch({ type: ADD_BOUNTY });
+      dispatch({
+        type: ADD_BOUNTY,
+        payload: res.data
+      });
+      dispatch(getBounty(res.data.id));
     })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))

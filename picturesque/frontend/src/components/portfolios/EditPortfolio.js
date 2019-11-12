@@ -3,38 +3,66 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import UploadModal from "./UploadModal";
 import ScrollingImages from "../common/ScrollingImages";
-import { getArtworks, addPortfolio } from "../../actions/portfolios";
-import { makeTagsArray } from "../../actions/utility";
+import {
+  getArtworks,
+  editPortfolio,
+  getPortfolio
+} from "../../actions/portfolios";
+import { makeTagsArray, makeTagsString } from "../../actions/utility";
 import { Redirect } from "react-router-dom";
 
-export class CreatePortfolio extends Component {
+export class EditPortfolio extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    portfolio: PropTypes.object,
     artworks: PropTypes.array.isRequired,
     getArtworks: PropTypes.func.isRequired,
-    addPortfolio: PropTypes.func.isRequired,
-    portfolio: PropTypes.object
+    editPortfolio: PropTypes.func.isRequired,
+    getPortfolio: PropTypes.func.isRequired
   };
 
   state = {
-    selected: new Set(),
     uploadModal: "uploadPic",
     title: "",
     description: "",
     tags: "",
     rate: "",
-    created: false
+    initialized: false,
+    selected: new Set(),
+    edited: false
   };
 
   componentDidMount() {
     this.props.getArtworks();
+    this.props.getPortfolio(this.props.match.params.id);
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.portfolio !== this.props.portfolio) {
-      this.setState({ created: true });
+  componentDidUpdate() {
+    if (!this.state.initialized && this.props.portfolio != null) {
+      const { title, description, tags, rate, artworks } = this.props.portfolio;
+
+      this.setState({
+        title: title,
+        description: description,
+        tags: makeTagsString(tags),
+        rate: rate,
+        selected: new Set(artworks.map(artwork => artwork.id)),
+        initialized: true
+      });
     }
   }
+
+  onPublish = e => {
+    e.preventDefault();
+    const { title, description, rate, selected } = this.state;
+    const id = this.props.portfolio.id;
+    const tags = makeTagsArray(this.state.tags);
+    const artworks = [...selected];
+    const portfolio = { id, title, description, tags, rate, artworks };
+    this.props.editPortfolio(portfolio);
+    this.setState({ edited: true });
+  };
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   selectImage = e => {
     const id = Number(e.target.id);
@@ -47,30 +75,19 @@ export class CreatePortfolio extends Component {
     });
   };
 
-  onPublish = e => {
-    e.preventDefault();
-    const { title, description, rate, selected } = this.state;
-    const user = this.props.user.id;
-    const tags = makeTagsArray(this.state.tags);
-    const artworks = [...selected];
-    const portfolio = { user, title, description, tags, rate, artworks };
-    this.props.addPortfolio(portfolio);
-  };
-
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
-
   render() {
-    if (this.state.created && this.props.portfolio) {
+    if (this.props.portfolio == null) {
+      return <p>No such portfolio exists</p>;
+    }
+
+    if (this.state.edited) {
       return <Redirect to={`/portfolios/view/${this.props.portfolio.id}`} />;
     }
 
     return (
       <div className="container">
         <UploadModal id={this.state.uploadModal} />
-        <h2>
-          Let us help you build your portfolio so you can attract buyers to your
-          art!
-        </h2>
+        <h2>Let us help you edit your portfolio to meet your new needs!</h2>
         <form onSubmit={this.onPublish}>
           <div className="form-group">
             <label>First, give a name to your portfolio:</label>
@@ -161,14 +178,13 @@ export class CreatePortfolio extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
   artworks: state.portfolios.artworks,
   portfolio: state.portfolios.portfolio
 });
 
-const mapDispatchToProps = { getArtworks, addPortfolio };
+const mapDispatchToProps = { getArtworks, editPortfolio, getPortfolio };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreatePortfolio);
+)(EditPortfolio);

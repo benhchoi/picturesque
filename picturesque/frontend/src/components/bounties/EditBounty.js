@@ -81,7 +81,7 @@ export class EditBounty extends Component {
 
   render() {
     if (this.props.bounty == null) {
-      return <p>No such bounty exists.</p>;
+      return <p>No such bounty exists</p>;
     }
 
     if (this.state.edited) {
@@ -90,6 +90,7 @@ export class EditBounty extends Component {
 
     return (
       <div className="container">
+        <UploadModal id={this.state.uploadModal} />
         <h2>Let us help you edit your bounty to match your new needs!</h2>
         <form onSubmit={this.onPublish}>
           <div className="form-group">
@@ -179,7 +180,6 @@ export class EditBounty extends Component {
             </button>
           </div>
         </form>
-        <UploadModal id={this.state.uploadModal} />
       </div>
     );
   }

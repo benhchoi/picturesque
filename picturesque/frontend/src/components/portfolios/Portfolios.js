@@ -4,12 +4,27 @@ import { connect } from "react-redux";
 import { getPortfolios } from "../../actions/portfolios";
 import { timeSince } from "../../actions/utility";
 import ScrollingImages from "../common/ScrollingImages";
+import ViewImageModal from "../common/ViewImageModal";
 import { Link } from "react-router-dom";
 
 export class Portfolios extends Component {
   static propTypes = {
     portfolios: PropTypes.array.isRequired,
     getPortfolios: PropTypes.func.isRequired
+  };
+
+  state = {
+    viewModal: "viewPic",
+    imageSrc: "",
+    imageDesc: ""
+  };
+
+  selectImage = e => {
+    const { src, alt } = e.target;
+    this.setState({
+      imageSrc: src,
+      imageDesc: alt
+    });
   };
 
   componentDidMount() {
@@ -19,6 +34,11 @@ export class Portfolios extends Component {
   render() {
     return (
       <div className="container">
+        <ViewImageModal
+          id={this.state.viewModal}
+          image={this.state.imageSrc}
+          description={this.state.imageDesc}
+        />
         <div className="row">
           <div className="col">
             <h2 className="text-center">Portfolios</h2>
@@ -49,9 +69,9 @@ export class Portfolios extends Component {
                   })}
               <ScrollingImages
                 images={portfolio.artworks}
-                onClick={() => {
-                  return;
-                }}
+                onClick={this.selectImage}
+                modalTarget={this.state.viewModal}
+                selected={new Set()}
               />
             </div>
           </div>

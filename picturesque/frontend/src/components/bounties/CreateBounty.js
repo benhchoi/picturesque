@@ -12,7 +12,8 @@ export class CreateBounty extends Component {
     user: PropTypes.object.isRequired,
     refArts: PropTypes.array.isRequired,
     getRefArts: PropTypes.func.isRequired,
-    addBounty: PropTypes.func.isRequired
+    addBounty: PropTypes.func.isRequired,
+    Bounty: PropTypes.object
   };
 
   state = {
@@ -28,6 +29,12 @@ export class CreateBounty extends Component {
 
   componentDidMount() {
     this.props.getRefArts();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.bounty !== this.props.bounty) {
+      this.setState({ created: true });
+    }
   }
 
   onPublish = e => {
@@ -55,8 +62,8 @@ export class CreateBounty extends Component {
   };
 
   render() {
-    if (this.state.created) {
-      return <Redirect to="/bounties" />;
+    if (this.state.created && this.props.bounty) {
+      return <Redirect to={`/bounties/view/${this.props.bounty.id}`} />;
     }
 
     return (
@@ -158,7 +165,8 @@ export class CreateBounty extends Component {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  refArts: state.bounties.refArts
+  refArts: state.bounties.refArts,
+  bounty: state.bounties.bounty
 });
 
 const mapDispatchToProps = { getRefArts, addBounty };

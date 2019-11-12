@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-export default class RefArtModal extends Component {
+export default class ViewImageModal extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
@@ -18,9 +18,6 @@ export default class RefArtModal extends Component {
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Reference Art</h5>
-            </div>
             <div className="modal-body">
               {!this.props.image ? (
                 <p className="text-center">Image not found</p>
