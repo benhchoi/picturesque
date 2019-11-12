@@ -3,8 +3,11 @@ export const GET_BOUNTIES = "GET_BOUNTIES";
 export const DELETE_BOUNTY = "DELETE_BOUNTY";
 export const ADD_BOUNTY = "ADD_BOUNTY";
 export const GET_BOUNTY = "GET_BOUNTY";
+export const GET_REFARTS = "GET_REFARTS";
 export const GET_REFART = "GET_REFART";
 export const UPLOAD_REFART = "UPLOAD_REFART";
+export const EDIT_BOUNTY = "EDIT_BOUNTY";
+export const GET_MY_BOUNTIES = "GET_MY_BOUNTIES";
 
 // portfolio related stuff
 export const GET_PORTFOLIOS = "GET_PORTFOLIOS";
@@ -13,6 +16,7 @@ export const ADD_PORTFOLIO = "ADD_PORTFOLIO";
 export const GET_PORTFOLIO = "GET_PORTFOLIO";
 export const UPLOAD_ARTWORK = "UPLOAD_ARTWORK";
 export const GET_ARTWORK = "GET_ARTWORK";
+export const GET_MY_PORTFOLIOS = "GET_MY_PORTFOLIOS";
 
 // auth related stuff
 export const USER_LOADING = "USER_LOADING";

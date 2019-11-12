@@ -25,3 +25,4 @@ class Bounty(models.Model):
     tags = TaggableManager()
     price = models.PositiveSmallIntegerField()
     reference_arts = models.ManyToManyField(ReferenceArt)
+    completed = models.BooleanField(default=False)

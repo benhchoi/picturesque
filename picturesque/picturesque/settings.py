@@ -41,12 +41,14 @@ INSTALLED_APPS = [
     'knox',
     'taggit',
     'taggit_serializer',
+    'annoying',
 
     # custom apps
     'frontend',
     'accounts',
     'bounties',
     'portfolios',
+    'favorites'
 ]
 
 TAGGIT_CASE_INSENSITIVE = True

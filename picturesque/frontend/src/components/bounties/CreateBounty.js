@@ -3,56 +3,65 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import UploadModal from "./UploadModal";
 import ScrollingImages from "../common/ScrollingImages";
-import { getRefArt, addBounty } from "../../actions/bounties";
+import { getRefArts, addBounty } from "../../actions/bounties";
 import { makeTagsArray } from "../../actions/utility";
+import { Redirect } from "react-router-dom";
 
 export class CreateBounty extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     refArts: PropTypes.array.isRequired,
-    getRefArt: PropTypes.func.isRequired,
+    getRefArts: PropTypes.func.isRequired,
     addBounty: PropTypes.func.isRequired
   };
 
   state = {
-    selected: new Set(),
-    modalId: "uploadPic",
+    uploadModal: "uploadPic",
+    viewModal: "viewPic",
     title: "",
     description: "",
     tags: "",
-    price: ""
+    price: "",
+    created: false,
+    selected: new Set()
   };
 
   componentDidMount() {
-    this.props.getRefArt();
+    this.props.getRefArts();
   }
-
-  clickImage = e => {
-    const key = e.target.id;
-    if (this.state.selected.has(key)) {
-      e.target.className = "img-thumbnail scrolling-card";
-      this.state.selected.delete(key);
-    } else {
-      e.target.className = "img-thumbnail scrolling-card selected";
-      this.state.selected.add(key);
-    }
-  };
 
   onPublish = e => {
     e.preventDefault();
     const { title, description, price, selected } = this.state;
     const user = this.props.user.id;
     const tags = makeTagsArray(this.state.tags);
-    const reference_arts = [...selected].map(Number);
+    const reference_arts = [...selected];
     const bounty = { user, title, description, tags, price, reference_arts };
     this.props.addBounty(bounty);
+    this.setState({ created: true });
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
+  selectImage = e => {
+    const id = Number(e.target.id);
+    this.setState(state => {
+      if (state.selected.has(id)) state.selected.delete(id);
+      else state.selected.add(id);
+      return {
+        selected: state.selected
+      };
+    });
+  };
+
   render() {
+    if (this.state.created) {
+      return <Redirect to="/bounties" />;
+    }
+
     return (
       <div className="container">
+        <UploadModal id={this.state.uploadModal} />
         <h2>Let us help you find the perfect artist for your needs!</h2>
         <form onSubmit={this.onPublish}>
           <div className="form-group">
@@ -96,7 +105,9 @@ export class CreateBounty extends Component {
             </button>
             <ScrollingImages
               images={this.props.refArts}
-              onClick={this.clickImage}
+              onClick={this.selectImage}
+              modalTarget={""}
+              selected={this.state.selected}
             />
           </div>
           <div className="form-group">
@@ -140,7 +151,6 @@ export class CreateBounty extends Component {
             </button>
           </div>
         </form>
-        <UploadModal id={this.state.modalId} />
       </div>
     );
   }
@@ -151,7 +161,7 @@ const mapStateToProps = state => ({
   refArts: state.bounties.refArts
 });
 
-const mapDispatchToProps = { getRefArt, addBounty };
+const mapDispatchToProps = { getRefArts, addBounty };
 
 export default connect(
   mapStateToProps,

@@ -4,7 +4,8 @@ import {
   ADD_PORTFOLIO,
   UPLOAD_ARTWORK,
   GET_ARTWORK,
-  GET_PORTFOLIO
+  GET_PORTFOLIO,
+  GET_MY_PORTFOLIOS
 } from "../actions/types";
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_PORTFOLIOS:
+    case GET_MY_PORTFOLIOS:
       return {
         ...state,
         portfolios: action.payload.reverse()

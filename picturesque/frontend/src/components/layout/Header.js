@@ -24,23 +24,23 @@ export class Header extends Component {
             aria-haspopup="true"
             aria-expanded="false"
           >
-            {user ? `${user.username}` : ""}
+            {isAuthenticated ? `${user.username}` : ""}
           </a>
           <div className="dropdown-menu">
-            {/* <a
+            <Link
               className="dropdown-item"
-              href={user ? `/u/${user.username}/bounties` : "#"}
+              to={isAuthenticated ? `/u/${user.username}/bounties` : "#"}
             >
               My Bounties
-            </a>
-            <a
+            </Link>
+            <Link
               className="dropdown-item"
-              href={user ? `/u/${user.username}/portfolios` : "#"}
+              to={isAuthenticated ? `/u/${user.username}/portfolios` : "#"}
             >
               My Portfolios
-            </a>
-            <div className="dropdown-divider"></div> */}
-            <button className="btn dropdown-item" onClick={this.props.logout}>
+            </Link>
+            <div className="dropdown-divider"></div>
+            <button className="dropdown-item" onClick={this.props.logout}>
               Logout
             </button>
           </div>

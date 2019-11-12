@@ -6,7 +6,8 @@ import { timeSince } from "../../actions/utility";
 
 export class Portfolio extends Component {
   static propTypes = {
-    getPortfolio: PropTypes.func.isRequired
+    getPortfolio: PropTypes.func.isRequired,
+    portfolio: PropTypes.object
   };
 
   componentDidMount() {
@@ -61,7 +62,7 @@ export class Portfolio extends Component {
                 <p className="text-center font-italic">{art.description}</p>
                 {art.price == null ? (
                   <p className="text-danger text-center">
-                    "This item is not for sale"
+                    This item is not for sale
                   </p>
                 ) : (
                   <p className="text-success text-center">

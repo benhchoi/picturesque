@@ -16,6 +16,14 @@
   background: lightblue;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  background: lightblue;
+}
+
 .selected {
   background: deepskyblue;
 }

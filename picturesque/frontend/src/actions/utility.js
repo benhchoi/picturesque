@@ -26,3 +26,8 @@ export const timeSince = timestamp => {
 export const makeTagsArray = tagsString => {
   return tagsString.split(/[ ,]+/).filter(Boolean);
 };
+
+// takes in a tagsArray and turns it into a tagsString
+export const makeTagsString = tagsArray => {
+  return tagsArray.join(", ");
+};

@@ -19,8 +19,13 @@ export class Portfolios extends Component {
   render() {
     return (
       <div className="container">
+        <div className="row">
+          <div className="col">
+            <h2 className="text-center">Portfolios</h2>
+          </div>
+        </div>
         {this.props.portfolios.map(portfolio => (
-          <div className="row p-2 border-bottom" key={portfolio.id}>
+          <div className="row p-2 border-top" key={portfolio.id}>
             <div className="col">
               <h4>
                 <Link to={`/portfolios/view/${portfolio.id}`}>
