@@ -29,7 +29,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         portfolios: state.portfolios.filter(
-          portfolio => portfolio.id !== action.payload
+          portfolio => portfolio.id !== action.payload.id
         ),
         portfolio: null
       };

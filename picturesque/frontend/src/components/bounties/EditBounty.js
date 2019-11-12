@@ -127,7 +127,7 @@ export class EditBounty extends Component {
               className="btn btn-primary"
               data-toggle="modal"
               type="button"
-              data-target={`#${this.state.modalId}`}
+              data-target={`#${this.state.uploadModal}`}
               onSubmit={e => e.preventDefault()}
             >
               Upload
