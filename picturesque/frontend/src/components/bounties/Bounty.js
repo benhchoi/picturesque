@@ -99,7 +99,7 @@ export class Bounty extends Component {
       <div className="row p-2 border-top">
         <div className="col">
           <a
-            className="btn btn-primary"
+            className="btn btn-primary m-1"
             href={`mailto: ${this.props.bounty.user.email}`}
           >
             Contact
@@ -175,7 +175,11 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-const mapDispatchToProps = { getBounty, deleteBounty, editBounty };
+const mapDispatchToProps = {
+  getBounty,
+  deleteBounty,
+  editBounty
+};
 
 export default connect(
   mapStateToProps,

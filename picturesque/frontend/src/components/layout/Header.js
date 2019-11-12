@@ -29,6 +29,12 @@ export class Header extends Component {
           <div className="dropdown-menu">
             <Link
               className="dropdown-item"
+              to={isAuthenticated ? "/favorites" : "#"}
+            >
+              My Favorites
+            </Link>
+            <Link
+              className="dropdown-item"
               to={isAuthenticated ? `/u/${user.username}/bounties` : "#"}
             >
               My Bounties

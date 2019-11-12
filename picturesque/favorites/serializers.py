@@ -1,14 +1,14 @@
 from rest_framework import serializers
 from .models import Favorites
 from accounts.serializers import UserSerializer
-from bounties.serializer import BountyReadSerializer
-from portfolios.serializer import PortfolioReadSerializer
+from bounties.serializers import BountyReadSerializer
+from portfolios.serializers import PortfolioReadSerializer
 
 
 class FavoritesReadSerializer(serializers.ModelSerializer):
     user = UserSerializer()
-    bounties = BountyReadSerializer()
-    portfolios = PortfolioReadSerializer()
+    bounties = BountyReadSerializer(many=True)
+    portfolios = PortfolioReadSerializer(many=True)
 
     class Meta:
         model = Favorites

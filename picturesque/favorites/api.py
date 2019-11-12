@@ -1,6 +1,5 @@
 from .models import Favorites
 from rest_framework import viewsets, permissions
-from rest_framework.response import Response
 from .serializers import FavoritesSerializer, FavoritesReadSerializer
 
 
@@ -16,4 +15,6 @@ class FavoritesViewSet(viewsets.ModelViewSet):
         return FavoritesSerializer
 
     def get_queryset(self):
-        queryset = self.request.user.favorites.all()
+        queryset = Favorites.objects.filter(user=self.request.user)
+        queryset = self.get_serializer_class().setup_eager_loading(queryset)
+        return queryset

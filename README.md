@@ -14,3 +14,4 @@ citation links:
 - time ago function: <https://stackoverflow.com/questions/6108819/javascript-timestamp-to-relative-time-eg-2-seconds-ago-one-week-ago-etc-best>
 - dealing with drf nested serializers: <https://stackoverflow.com/questions/41312558/django-rest-framework-post-nested-objects>
 - how to access params from react router: <https://stackoverflow.com/questions/45898789/react-router-pass-param-to-component>
+- using different serializers for request and reply: <https://stackoverflow.com/questions/51207089/use-different-serializer-for-request-and-reply>

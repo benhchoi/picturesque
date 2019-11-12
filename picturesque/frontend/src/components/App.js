@@ -23,6 +23,7 @@ import CreatePortfolio from "./portfolios/CreatePortfolio";
 import Portfolio from "./portfolios/Portfolio";
 import EditPortfolio from "./portfolios/EditPortfolio";
 import MyPortfolios from "./portfolios/MyPortfolios";
+import Favorites from "./favorites/Favorites";
 
 import { Provider } from "react-redux";
 import store from "../store";
@@ -52,6 +53,7 @@ class App extends Component {
                   <Route exact path="/" component={Home} />
                   <Route exact path="/buy" component={Buy} />
                   <Route exact path="/sell" component={Sell} />
+                  <PrivateRoute exact path="/favorites" component={Favorites} />
                   <Route exact path="/bounties" component={Bounties} />
                   <PrivateRoute
                     exact

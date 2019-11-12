@@ -14,14 +14,14 @@ export default class Home extends Component {
           <div className="col">
             <div className="jumbotron">
               <Link to="/buy">
-                <h2 className="text-center">Buy Art</h2>
+                <h2 className="text-center">Request Art</h2>
               </Link>
             </div>
           </div>
           <div className="col">
             <div className="jumbotron">
               <Link to="/sell">
-                <h2 className="text-center">Sell Art</h2>
+                <h2 className="text-center">Offer Art</h2>
               </Link>
             </div>
           </div>

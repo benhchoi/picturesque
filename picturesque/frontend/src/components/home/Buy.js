@@ -14,7 +14,7 @@ export default class Buy extends Component {
           <div className="col">
             <div className="jumbotron">
               <Link to="/portfolios">
-                <h2 className="text-center">Search for the perfect artist</h2>
+                <h2 className="text-center">Browse artists' portfolios</h2>
               </Link>
             </div>
           </div>
@@ -22,8 +22,7 @@ export default class Buy extends Component {
             <div className="jumbotron">
               <Link to="/bounties/create">
                 <h2 className="text-center">
-                  Create a personalized art-wanted bounty to let artists come to
-                  you
+                  Make a commission request (bounty)
                 </h2>
               </Link>
             </div>
