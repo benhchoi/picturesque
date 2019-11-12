@@ -17,7 +17,7 @@ export class EditBounty extends Component {
   };
 
   state = {
-    modalId: "uploadPic",
+    uploadModal: "uploadPic",
     title: "",
     description: "",
     tags: "",
@@ -179,7 +179,7 @@ export class EditBounty extends Component {
             </button>
           </div>
         </form>
-        <UploadModal id={this.state.modalId} />
+        <UploadModal id={this.state.uploadModal} />
       </div>
     );
   }

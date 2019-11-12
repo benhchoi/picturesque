@@ -19,6 +19,12 @@ export class Alerts extends Component {
       if (error.msg.non_field_errors)
         alert.error(error.msg.non_field_errors.join());
       if (error.msg.username) alert.error(error.msg.username.join());
+      if (error.msg.title) alert.error(`Title: ${error.msg.title.join()}`);
+      if (error.msg.description)
+        alert.error(`Description: ${error.msg.description.join()}`);
+      if (error.msg.price) alert.error(`Price: ${error.msg.price.join()}`);
+      if (error.msg.reference_arts)
+        alert.error(`Reference Art: ${error.msg.reference_arts.join()}`);
     }
 
     if (message !== prevProps.message) {
