@@ -40,7 +40,10 @@ export class Portfolio extends Component {
   };
 
   componentDidMount() {
-    this.props.getPortfolio(this.props.match.params.id);
+    const id = this.props.match.params.id;
+    if (this.props.portfolio == null || this.props.portfolio.id != id) {
+      this.props.getPortfolio(this.props.match.params.id);
+    }
   }
 
   render() {
@@ -164,7 +167,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { getPortfolio, editPortfolio, deletePortfolio };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Portfolio);
+export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);

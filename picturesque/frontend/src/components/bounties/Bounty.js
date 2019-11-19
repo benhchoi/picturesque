@@ -22,7 +22,10 @@ export class Bounty extends Component {
   };
 
   componentDidMount() {
-    this.props.getBounty(this.props.match.params.id);
+    const id = this.props.match.params.id;
+    if (this.props.bounty == null || this.props.bounty.id != id) {
+      this.props.getBounty(id);
+    }
   }
 
   onDelete = e => {
@@ -181,7 +184,4 @@ const mapDispatchToProps = {
   editBounty
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Bounty);
+export default connect(mapStateToProps, mapDispatchToProps)(Bounty);

@@ -32,8 +32,11 @@ export class EditPortfolio extends Component {
   };
 
   componentDidMount() {
+    const id = this.props.match.params.id;
     this.props.getArtworks();
-    this.props.getPortfolio(this.props.match.params.id);
+    if (this.props.portfolio == null || this.props.portfolio.id != id) {
+      this.props.getPortfolio(this.props.match.params.id);
+    }
   }
 
   componentDidUpdate(prevProps) {

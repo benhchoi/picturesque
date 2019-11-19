@@ -28,8 +28,11 @@ export class EditBounty extends Component {
   };
 
   componentDidMount() {
+    const id = this.props.match.params.id;
     this.props.getRefArts();
-    this.props.getBounty(this.props.match.params.id);
+    if (this.props.bounty == null || this.props.bounty.id != id) {
+      this.props.getBounty(id);
+    }
   }
 
   componentDidUpdate(prevProps) {

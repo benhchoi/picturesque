@@ -55,7 +55,7 @@ export const login = (username, password) => dispatch => {
         type: LOGIN_SUCCESS,
         payload: res.data
       });
-      dispatch(getFavorites(res.data.id));
+      dispatch(getFavorites(res.data.user.id));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
@@ -88,7 +88,7 @@ export const register = ({ username, email, password }) => dispatch => {
         type: REGISTER_SUCCESS,
         payload: res.data
       });
-      dispatch(getFavorites(res.data.id));
+      dispatch(getFavorites(res.data.user.id));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
