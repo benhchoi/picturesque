@@ -40,10 +40,7 @@ export class Portfolio extends Component {
   };
 
   componentDidMount() {
-    const id = this.props.match.params.id;
-    if (this.props.portfolio == null || this.props.portfolio.id != id) {
-      this.props.getPortfolio(this.props.match.params.id);
-    }
+    this.props.getPortfolio(this.props.match.params.id);
   }
 
   render() {
