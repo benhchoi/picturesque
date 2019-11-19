@@ -7,34 +7,24 @@ export default class Home extends Component {
       <div className="container">
         <div className="row">
           <div className="col">
-            <h1 className="text-center">What would you like to do?</h1>
+            <h1 className="text-center">Are you a...</h1>
           </div>
         </div>
         <div className="row">
           <div className="col">
             <div className="jumbotron">
               <Link to="/buy">
-                <h2 className="text-center">Request Art</h2>
+                <h2 className="text-center">Buyer</h2>
               </Link>
             </div>
           </div>
           <div className="col">
             <div className="jumbotron">
               <Link to="/sell">
-                <h2 className="text-center">Offer Art</h2>
+                <h2 className="text-center">Seller</h2>
               </Link>
             </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <Link to="/bounties">
-              <p className="text-center">Actually, I'd just like to browse</p>
-            </Link>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col"></div>
         </div>
       </div>
     );

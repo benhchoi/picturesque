@@ -1,21 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getFavorites } from "../../actions/favorites";
 import { Link } from "react-router-dom";
 
 export class Favorites extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
-    favorites: PropTypes.object,
-    getFavorites: PropTypes.func.isRequired
+    favorites: PropTypes.object.isRequired
   };
-
-  componentDidMount() {
-    if (this.props.favorites == null) {
-      this.props.getFavorites(this.props.user.id);
-    }
-  }
 
   render() {
     if (this.props.favorites == null) {
@@ -101,9 +93,6 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-const mapDispatchToProps = { getFavorites };
+const mapDispatchToProps = {};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Favorites);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

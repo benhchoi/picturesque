@@ -32,8 +32,12 @@ export class EditBounty extends Component {
     this.props.getBounty(this.props.match.params.id);
   }
 
-  componentDidUpdate() {
-    if (!this.state.initialized && this.props.bounty != null) {
+  componentDidUpdate(prevProps) {
+    if (
+      !this.state.initialized &&
+      this.props.bounty != null &&
+      this.props.bounty.id == this.propsmatch.params.id
+    ) {
       const {
         title,
         description,
@@ -51,6 +55,12 @@ export class EditBounty extends Component {
         initialized: true
       });
     }
+
+    if (prevProps.bounty !== this.props.bounty) {
+      this.setState({
+        edited: true
+      });
+    }
   }
 
   onPublish = e => {
@@ -61,9 +71,6 @@ export class EditBounty extends Component {
     const reference_arts = [...selected].map(Number);
     const bounty = { id, title, description, tags, price, reference_arts };
     this.props.editBounty(bounty);
-    this.setState({
-      edited: true
-    });
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -192,7 +199,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { getRefArts, editBounty, getBounty };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditBounty);
+export default connect(mapStateToProps, mapDispatchToProps)(EditBounty);

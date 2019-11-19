@@ -36,8 +36,12 @@ export class EditPortfolio extends Component {
     this.props.getPortfolio(this.props.match.params.id);
   }
 
-  componentDidUpdate() {
-    if (!this.state.initialized && this.props.portfolio != null) {
+  componentDidUpdate(prevProps) {
+    if (
+      !this.state.initialized &&
+      this.props.portfolio != null &&
+      this.props.portfolio.id == this.props.match.params.id
+    ) {
       const { title, description, tags, rate, artworks } = this.props.portfolio;
 
       this.setState({
@@ -47,6 +51,12 @@ export class EditPortfolio extends Component {
         rate: rate,
         selected: new Set(artworks.map(artwork => artwork.id)),
         initialized: true
+      });
+    }
+
+    if (prevProps.portfolio !== this.props.portfolio) {
+      this.setState({
+        edited: true
       });
     }
   }
@@ -59,7 +69,6 @@ export class EditPortfolio extends Component {
     const artworks = [...selected];
     const portfolio = { id, title, description, tags, rate, artworks };
     this.props.editPortfolio(portfolio);
-    this.setState({ edited: true });
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -184,7 +193,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { getArtworks, editPortfolio, getPortfolio };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditPortfolio);
+export default connect(mapStateToProps, mapDispatchToProps)(EditPortfolio);
