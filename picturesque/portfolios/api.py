@@ -1,7 +1,6 @@
 from .models import Portfolio, Artwork
 from rest_framework import viewsets, permissions
-from .serializers import (PortfolioSerializer, PortfolioReadSerializer,
-                          ArtworkSerializer)
+from .serializers import PortfolioSerializer, ArtworkSerializer
 
 
 # artwork viewset
@@ -20,12 +19,7 @@ class PortfolioViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
     ]
-
-    def get_serializer_class(self):
-        if self.request.method == 'GET':
-            return PortfolioReadSerializer
-
-        return PortfolioSerializer
+    serializer_class = PortfolioSerializer
 
     def get_queryset(self):
         queryset = Portfolio.objects.all()
@@ -38,7 +32,7 @@ class MyPortfoliosViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [
         permissions.IsAuthenticated
     ]
-    serializer_class = PortfolioReadSerializer
+    serializer_class = PortfolioSerializer
 
     def get_queryset(self):
         queryset = self.request.user.portfolios.all()

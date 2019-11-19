@@ -97,7 +97,6 @@ export const addPortfolio = portfolio => (dispatch, getState) => {
         type: ADD_PORTFOLIO,
         payload: res.data
       });
-      dispatch(getPortfolio(res.data.id));
     })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -143,7 +142,6 @@ export const editPortfolio = portfolio => (dispatch, getState) => {
         type: EDIT_PORTFOLIO,
         payload: res.data
       });
-      dispatch(getPortfolio(portfolio.id));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

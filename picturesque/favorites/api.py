@@ -1,18 +1,13 @@
 from .models import Favorites
 from rest_framework import viewsets, permissions
-from .serializers import FavoritesSerializer, FavoritesReadSerializer
+from .serializers import FavoritesSerializer
 
 
 class FavoritesViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticated
     ]
-
-    def get_serializer_class(self):
-        if self.request.method == 'GET':
-            return FavoritesReadSerializer
-
-        return FavoritesSerializer
+    serializer_class = FavoritesSerializer
 
     def get_queryset(self):
         queryset = Favorites.objects.filter(user=self.request.user)

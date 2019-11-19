@@ -97,7 +97,6 @@ export const addBounty = bounty => (dispatch, getState) => {
         type: ADD_BOUNTY,
         payload: res.data
       });
-      dispatch(getBounty(res.data.id));
     })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -128,7 +127,6 @@ export const editBounty = bounty => (dispatch, getState) => {
         type: EDIT_BOUNTY,
         payload: res.data
       });
-      dispatch(getBounty(bounty.id));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

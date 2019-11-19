@@ -27,7 +27,6 @@ export const updateFavorites = favorites => (dispatch, getState) => {
         type: UPDATE_FAVORITES,
         payload: res.data
       });
-      dispatch(getFavorites(favorites.id));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

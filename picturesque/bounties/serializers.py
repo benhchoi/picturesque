@@ -34,6 +34,10 @@ class BountySerializer(TaggitSerializer, serializers.ModelSerializer):
         model = Bounty
         fields = '__all__'
 
+    def to_representation(self, instance):
+        serializer = BountyReadSerializer(instance)
+        return serializer.data
+
     @staticmethod
     def setup_eager_loading(queryset):
         queryset = queryset.select_related('user')

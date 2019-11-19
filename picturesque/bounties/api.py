@@ -1,8 +1,7 @@
 from .models import Bounty, ReferenceArt
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
-from .serializers import (BountySerializer, BountyReadSerializer,
-                          ReferenceArtSerializer)
+from .serializers import BountySerializer, ReferenceArtSerializer
 
 
 # reference art viewset
@@ -21,12 +20,7 @@ class BountyViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
     ]
-
-    def get_serializer_class(self):
-        if self.request.method == 'GET':
-            return BountyReadSerializer
-
-        return BountySerializer
+    serializer_class = BountySerializer
 
     def get_queryset(self):
         queryset = Bounty.objects.all()
@@ -39,7 +33,7 @@ class MyBountiesViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [
         permissions.IsAuthenticated
     ]
-    serializer_class = BountyReadSerializer
+    serializer_class = BountySerializer
 
     def get_queryset(self):
         queryset = self.request.user.bounties.all()

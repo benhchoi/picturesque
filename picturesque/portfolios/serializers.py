@@ -35,6 +35,10 @@ class PortfolioSerializer(TaggitSerializer, serializers.ModelSerializer):
         model = Portfolio
         fields = '__all__'
 
+    def to_representation(self, instance):
+        serializer = PortfolioReadSerializer(instance)
+        return serializer.data
+
     @staticmethod
     def setup_eager_loading(queryset):
         """ Perform necessary eager loading of data. """

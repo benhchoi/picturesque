@@ -49,12 +49,12 @@ export default function(state = initialState, action) {
         refArt: action.payload
       };
     case GET_BOUNTY:
+    case EDIT_BOUNTY:
+    case ADD_BOUNTY:
       return {
         ...state,
         bounty: action.payload
       };
-    case EDIT_BOUNTY:
-    case ADD_BOUNTY:
     default:
       return state;
   }
