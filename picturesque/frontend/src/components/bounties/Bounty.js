@@ -22,7 +22,7 @@ export class Bounty extends Component {
   };
 
   componentDidMount() {
-    this.props.getBounty(id);
+    this.props.getBounty(this.props.match.params.id);
   }
 
   onDelete = e => {
