@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {
-  getPortfolio,
-  editPortfolio,
-  deletePortfolio
-} from "../../actions/portfolios";
+import { getPortfolio, deletePortfolio } from "../../actions/portfolios";
+import { updateFavorites } from "../../actions/favorites";
 import { timeSince } from "../../actions/utility";
 import { Link, Redirect } from "react-router-dom";
 import ViewImageModal from "../common/ViewImageModal";
@@ -14,8 +11,9 @@ export class Portfolio extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     getPortfolio: PropTypes.func.isRequired,
-    editPortfolio: PropTypes.func.isRequired,
-    portfolio: PropTypes.object
+    portfolio: PropTypes.object,
+    favorites: PropTypes.array.isRequired,
+    updateFavorites: PropTypes.func.isRequired
   };
 
   state = {
@@ -29,6 +27,17 @@ export class Portfolio extends Component {
     e.preventDefault();
     this.props.deletePortfolio(this.props.portfolio.id);
     this.setState({ deleted: true });
+  };
+
+  onFavorite = e => {
+    e.preventDefault();
+    const id = this.props.auth.user.id;
+    const portfolioId = this.props.portfolio.id;
+    const portfolios = this.props.favorites.includes(portfolioId)
+      ? this.props.favorites.filter(favorite => portfolioId !== favorite)
+      : [...this.props.favorites, portfolioId];
+    const favorites = { id, portfolios };
+    this.props.updateFavorites(favorites);
   };
 
   selectImage = e => {
@@ -83,6 +92,15 @@ export class Portfolio extends Component {
           >
             Contact
           </a>
+          <button
+            type="button"
+            className="btn btn-info m-1"
+            onClick={this.onFavorite}
+          >
+            {this.props.favorites.includes(this.props.portfolio.id)
+              ? "Unfavorite"
+              : "Favorite"}
+          </button>
         </div>
       </div>
     );
@@ -159,9 +177,14 @@ export class Portfolio extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  portfolio: state.portfolios.portfolio
+  portfolio: state.portfolios.portfolio,
+  favorites: state.favorites.portfolios.map(portfolio => portfolio.id)
 });
 
-const mapDispatchToProps = { getPortfolio, editPortfolio, deletePortfolio };
+const mapDispatchToProps = {
+  getPortfolio,
+  deletePortfolio,
+  updateFavorites
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);

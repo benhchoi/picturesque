@@ -1,7 +1,8 @@
 import { GET_FAVORITES, UPDATE_FAVORITES } from "../actions/types";
 
 const initialState = {
-  favorites: null
+  bounties: [],
+  portfolios: []
 };
 
 export default function(state = initialState, action) {
@@ -10,7 +11,8 @@ export default function(state = initialState, action) {
     case UPDATE_FAVORITES:
       return {
         ...state,
-        favorites: action.payload
+        bounties: action.payload.bounties,
+        portfolios: action.payload.portfolios
       };
     default:
       return state;

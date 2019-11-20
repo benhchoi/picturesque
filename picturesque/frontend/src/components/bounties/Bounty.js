@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getBounty, deleteBounty, editBounty } from "../../actions/bounties";
+import { updateFavorites } from "../../actions/favorites";
 import { timeSince } from "../../actions/utility";
 import { Link, Redirect } from "react-router-dom";
 import ViewImageModal from "../common/ViewImageModal";
@@ -11,7 +12,9 @@ export class Bounty extends Component {
     auth: PropTypes.object.isRequired,
     getBounty: PropTypes.func.isRequired,
     editBounty: PropTypes.func.isRequired,
-    bounty: PropTypes.object
+    bounty: PropTypes.object,
+    favorites: PropTypes.array.isRequired,
+    updateFavorites: PropTypes.func.isRequired
   };
 
   state = {
@@ -37,6 +40,17 @@ export class Bounty extends Component {
     const completed = !this.props.bounty.completed;
     const bounty = { id, completed };
     this.props.editBounty(bounty);
+  };
+
+  onFavorite = e => {
+    e.preventDefault();
+    const id = this.props.auth.user.id;
+    const bountyId = this.props.bounty.id;
+    const bounties = this.props.favorites.includes(bountyId)
+      ? this.props.favorites.filter(favorite => bountyId !== favorite)
+      : [...this.props.favorites, bountyId];
+    const favorites = { id, bounties };
+    this.props.updateFavorites(favorites);
   };
 
   selectImage = e => {
@@ -104,6 +118,15 @@ export class Bounty extends Component {
           >
             Contact
           </a>
+          <button
+            type="button"
+            className="btn btn-info m-1"
+            onClick={this.onFavorite}
+          >
+            {this.props.favorites.includes(this.props.bounty.id)
+              ? "Unfavorite"
+              : "Favorite"}
+          </button>
         </div>
       </div>
     );
@@ -172,13 +195,15 @@ export class Bounty extends Component {
 
 const mapStateToProps = state => ({
   bounty: state.bounties.bounty,
-  auth: state.auth
+  auth: state.auth,
+  favorites: state.favorites.bounties.map(bounty => bounty.id)
 });
 
 const mapDispatchToProps = {
   getBounty,
   deleteBounty,
-  editBounty
+  editBounty,
+  updateFavorites
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Bounty);

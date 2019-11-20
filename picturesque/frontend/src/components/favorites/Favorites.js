@@ -6,14 +6,11 @@ import { Link } from "react-router-dom";
 export class Favorites extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
-    favorites: PropTypes.object.isRequired
+    bounties: PropTypes.array.isRequired,
+    portfolios: PropTypes.array.isRequired
   };
 
   render() {
-    if (this.props.favorites == null) {
-      return <p>You have no favorites</p>;
-    }
-
     return (
       <div className="container">
         <div className="row">
@@ -26,14 +23,14 @@ export class Favorites extends Component {
             <h3 className="text-info">Bounties</h3>
           </div>
         </div>
-        {this.props.favorites.bounties.length == 0 ? (
+        {this.props.bounties.length == 0 ? (
           <div className="row p-2 border-top align-items-center">
             <div className="col">
               <h4>You have no favorite bounties</h4>
             </div>
           </div>
         ) : (
-          this.props.favorites.bounties.map(bounty => (
+          this.props.bounties.map(bounty => (
             <div
               className="row p-2 border-top align-items-center"
               key={bounty.id}
@@ -61,14 +58,14 @@ export class Favorites extends Component {
             <h3 className="text-info mt-5">Portfolios</h3>
           </div>
         </div>
-        {this.props.favorites.portfolios.length == 0 ? (
+        {this.props.portfolios.length == 0 ? (
           <div className="row p-2 border-top align-items-center">
             <div className="col">
               <h4>You have no favorite portfolios</h4>
             </div>
           </div>
         ) : (
-          this.props.favorites.portfolios.map(portfolio => (
+          this.props.portfolios.map(portfolio => (
             <div
               className="row p-2 border-top align-items-center"
               key={portfolio.id}
@@ -89,7 +86,8 @@ export class Favorites extends Component {
 }
 
 const mapStateToProps = state => ({
-  favorites: state.favorites.favorites,
+  bounties: state.favorites.bounties,
+  portfolios: state.favorites.portfolios,
   user: state.auth.user
 });
 
