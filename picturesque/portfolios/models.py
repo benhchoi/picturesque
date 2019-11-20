@@ -12,7 +12,7 @@ class Artwork(models.Model):
                              related_name="artworks",
                              on_delete=models.CASCADE)
     image = models.ImageField(upload_to=find_path)
-    price = models.PositiveSmallIntegerField(null=True, blank=True)
+    price = models.PositiveIntegerField(null=True, blank=True)
     description = models.CharField(max_length=200)
 
 
@@ -24,5 +24,5 @@ class Portfolio(models.Model):
     description = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     tags = TaggableManager()
-    rate = models.PositiveSmallIntegerField()
+    rate = models.PositiveIntegerField()
     artworks = models.ManyToManyField(Artwork)

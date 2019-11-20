@@ -23,6 +23,6 @@ class Bounty(models.Model):
     description = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     tags = TaggableManager()
-    price = models.PositiveSmallIntegerField()
+    price = models.PositiveIntegerField()
     reference_arts = models.ManyToManyField(ReferenceArt)
     completed = models.BooleanField(default=False)
