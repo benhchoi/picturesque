@@ -21,7 +21,8 @@ export class Bounty extends Component {
     deleted: false,
     viewModal: "viewPic",
     imageSrc: "",
-    imageDesc: ""
+    imageDesc: "",
+    redirect: false
   };
 
   componentDidMount() {
@@ -44,6 +45,14 @@ export class Bounty extends Component {
 
   onFavorite = e => {
     e.preventDefault();
+
+    if (!this.props.auth.isAuthenticated) {
+      this.setState({
+        redirect: true
+      });
+      return;
+    }
+
     const id = this.props.auth.user.id;
     const bountyId = this.props.bounty.id;
     const bounties = this.props.favorites.includes(bountyId)
@@ -64,6 +73,10 @@ export class Bounty extends Component {
   render() {
     if (this.state.deleted) {
       return <Redirect to="/bounties" />;
+    }
+
+    if (this.state.redirect) {
+      return <Redirect to="/login" />;
     }
 
     if (this.props.bounty == null) {

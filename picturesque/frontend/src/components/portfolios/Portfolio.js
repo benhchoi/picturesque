@@ -20,7 +20,8 @@ export class Portfolio extends Component {
     deleted: false,
     viewModal: "viewPic",
     imageSrc: "",
-    imageDesc: ""
+    imageDesc: "",
+    redirect: false
   };
 
   onDelete = e => {
@@ -31,6 +32,14 @@ export class Portfolio extends Component {
 
   onFavorite = e => {
     e.preventDefault();
+
+    if (!this.props.auth.isAuthenticated) {
+      this.setState({
+        redirect: true
+      });
+      return;
+    }
+
     const id = this.props.auth.user.id;
     const portfolioId = this.props.portfolio.id;
     const portfolios = this.props.favorites.includes(portfolioId)
@@ -55,6 +64,10 @@ export class Portfolio extends Component {
   render() {
     if (this.state.deleted) {
       return <Redirect to="/portfolios" />;
+    }
+
+    if (this.state.redirect) {
+      return <Redirect to="/login" />;
     }
 
     if (this.props.portfolio == null) {
