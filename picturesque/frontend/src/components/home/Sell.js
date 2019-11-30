@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Breadcrumbs from "../layout/Breadcrumbs";
 
 export default class Sell extends Component {
   render() {
     return (
       <div className="container">
+        <Breadcrumbs path={this.props.location.pathname} />
         <div className="row">
           <div className="col">
             <h1 className="text-center">Would you like to...</h1>

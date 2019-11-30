@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getMyPortfolios } from "../../actions/portfolios";
 import { Link } from "react-router-dom";
+import Breadcrumbs from "../layout/Breadcrumbs";
 
 export class MyPortfolios extends Component {
   static propTypes = {
@@ -17,6 +18,7 @@ export class MyPortfolios extends Component {
   render() {
     return (
       <div className="container">
+        <Breadcrumbs path={this.props.location.pathname} />
         <div className="row">
           <div className="col">
             <h2 className="text-center">My portfolios</h2>
@@ -47,7 +49,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { getMyPortfolios };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MyPortfolios);
+export default connect(mapStateToProps, mapDispatchToProps)(MyPortfolios);

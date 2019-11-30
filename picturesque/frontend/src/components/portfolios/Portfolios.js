@@ -6,6 +6,7 @@ import { timeSince } from "../../actions/utility";
 import ScrollingImages from "../common/ScrollingImages";
 import ViewImageModal from "../common/ViewImageModal";
 import { Link } from "react-router-dom";
+import Breadcrumbs from "../layout/Breadcrumbs";
 
 export class Portfolios extends Component {
   static propTypes = {
@@ -34,6 +35,7 @@ export class Portfolios extends Component {
   render() {
     return (
       <div className="container">
+        <Breadcrumbs path={this.props.location.pathname} />
         <ViewImageModal
           id={this.state.viewModal}
           image={this.state.imageSrc}
@@ -87,7 +89,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { getPortfolios };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Portfolios);
+export default connect(mapStateToProps, mapDispatchToProps)(Portfolios);

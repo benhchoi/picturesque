@@ -29,7 +29,7 @@ export class Header extends Component {
           <div className="dropdown-menu">
             <Link
               className="dropdown-item"
-              to={isAuthenticated ? "/favorites" : "#"}
+              to={isAuthenticated ? `/u/${user.username}/favorites` : "#"}
             >
               My Favorites
             </Link>
@@ -65,7 +65,7 @@ export class Header extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-light bg-light">
+      <nav className="navbar navbar-expand-sm navbar-light bg-light m-2">
         <div className="container">
           <a className="navbar-brand" href="#">
             Picturesque
@@ -83,7 +83,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { logout };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

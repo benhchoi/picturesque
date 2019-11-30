@@ -6,6 +6,7 @@ import ScrollingImages from "../common/ScrollingImages";
 import { getArtworks, addPortfolio } from "../../actions/portfolios";
 import { makeTagsArray } from "../../actions/utility";
 import { Redirect } from "react-router-dom";
+import Breadcrumbs from "../layout/Breadcrumbs";
 
 export class CreatePortfolio extends Component {
   static propTypes = {
@@ -66,6 +67,7 @@ export class CreatePortfolio extends Component {
 
     return (
       <div className="container">
+        <Breadcrumbs path={this.props.location.pathname} />
         <UploadModal id={this.state.uploadModal} />
         <h2>
           Let us help you build your portfolio so you can attract buyers to your
@@ -168,7 +170,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { getArtworks, addPortfolio };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreatePortfolio);
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePortfolio);

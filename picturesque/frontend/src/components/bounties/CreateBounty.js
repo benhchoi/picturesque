@@ -6,6 +6,7 @@ import ScrollingImages from "../common/ScrollingImages";
 import { getRefArts, addBounty } from "../../actions/bounties";
 import { makeTagsArray } from "../../actions/utility";
 import { Redirect } from "react-router-dom";
+import Breadcrumbs from "../layout/Breadcrumbs";
 
 export class CreateBounty extends Component {
   static propTypes = {
@@ -68,6 +69,7 @@ export class CreateBounty extends Component {
 
     return (
       <div className="container">
+        <Breadcrumbs path={this.props.location.pathname} />
         <UploadModal id={this.state.uploadModal} />
         <h2>Let us help you find the perfect artist for your needs!</h2>
         <form onSubmit={this.onPublish}>
@@ -171,7 +173,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { getRefArts, addBounty };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateBounty);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateBounty);

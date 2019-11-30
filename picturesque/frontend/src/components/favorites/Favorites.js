@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Breadcrumbs from "../layout/Breadcrumbs";
 
 export class Favorites extends Component {
   static propTypes = {
@@ -13,6 +14,7 @@ export class Favorites extends Component {
   render() {
     return (
       <div className="container">
+        <Breadcrumbs path={this.props.location.pathname} />
         <div className="row">
           <div className="col">
             <h2 className="text-center">My Favorites</h2>

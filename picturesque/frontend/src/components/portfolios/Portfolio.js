@@ -6,6 +6,7 @@ import { updateFavorites } from "../../actions/favorites";
 import { timeSince } from "../../actions/utility";
 import { Link, Redirect } from "react-router-dom";
 import ViewImageModal from "../common/ViewImageModal";
+import Breadcrumbs from "../layout/Breadcrumbs";
 
 export class Portfolio extends Component {
   static propTypes = {
@@ -120,6 +121,7 @@ export class Portfolio extends Component {
 
     return (
       <div className="container">
+        <Breadcrumbs path={this.props.location.pathname} />
         <ViewImageModal
           id={this.state.viewModal}
           image={this.state.imageSrc}

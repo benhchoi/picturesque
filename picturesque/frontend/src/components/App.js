@@ -53,7 +53,7 @@ class App extends Component {
                   <Route exact path="/" component={Home} />
                   <Route exact path="/buy" component={Buy} />
                   <Route exact path="/sell" component={Sell} />
-                  <PrivateRoute exact path="/favorites" component={Favorites} />
+
                   <Route exact path="/bounties" component={Bounties} />
                   <PrivateRoute
                     exact
@@ -91,6 +91,11 @@ class App extends Component {
                     exact
                     path="/u/:username/portfolios"
                     component={MyPortfolios}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/u/:username/favorites"
+                    component={Favorites}
                   />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />

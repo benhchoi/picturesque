@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getMyBounties } from "../../actions/bounties";
 import { Link } from "react-router-dom";
+import Breadcrumbs from "../layout/Breadcrumbs";
 
 export class MyBounties extends Component {
   static propTypes = {
@@ -17,6 +18,7 @@ export class MyBounties extends Component {
   render() {
     return (
       <div className="container">
+        <Breadcrumbs path={this.props.location.pathname} />
         <div className="row">
           <div className="col">
             <h2 className="text-center">My Bounties</h2>
@@ -53,7 +55,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { getMyBounties };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MyBounties);
+export default connect(mapStateToProps, mapDispatchToProps)(MyBounties);

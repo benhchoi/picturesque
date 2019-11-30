@@ -6,6 +6,7 @@ import ScrollingImages from "../common/ScrollingImages";
 import { getRefArts, editBounty, getBounty } from "../../actions/bounties";
 import { makeTagsArray, makeTagsString } from "../../actions/utility";
 import { Redirect } from "react-router-dom";
+import Breadcrumbs from "../layout/Breadcrumbs";
 
 export class EditBounty extends Component {
   static propTypes = {
@@ -39,7 +40,7 @@ export class EditBounty extends Component {
     if (
       !this.state.initialized &&
       this.props.bounty != null &&
-      this.props.bounty.id == this.propsmatch.params.id
+      this.props.bounty.id == this.props.match.params.id
     ) {
       const {
         title,
@@ -100,6 +101,7 @@ export class EditBounty extends Component {
 
     return (
       <div className="container">
+        <Breadcrumbs path={this.props.location.pathname} />
         <UploadModal id={this.state.uploadModal} />
         <h2>Let us help you edit your bounty to match your new needs!</h2>
         <form onSubmit={this.onPublish}>

@@ -10,6 +10,7 @@ import {
 } from "../../actions/portfolios";
 import { makeTagsArray, makeTagsString } from "../../actions/utility";
 import { Redirect } from "react-router-dom";
+import Breadcrumbs from "../layout/Breadcrumbs";
 
 export class EditPortfolio extends Component {
   static propTypes = {
@@ -98,6 +99,7 @@ export class EditPortfolio extends Component {
 
     return (
       <div className="container">
+        <Breadcrumbs path={this.props.location.pathname} />
         <UploadModal id={this.state.uploadModal} />
         <h2>Let us help you edit your portfolio to meet your new needs!</h2>
         <form onSubmit={this.onPublish}>
