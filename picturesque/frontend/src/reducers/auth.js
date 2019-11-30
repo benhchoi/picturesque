@@ -6,19 +6,24 @@ import {
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGSITER_FAIL
+  REGSITER_FAIL,
+  CHECK_USERNAME,
+  CHECK_USERNAME_SUCCESS,
+  CHECK_USERNAME_FAIL
 } from "../actions/types";
 
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: false,
   isLoading: false,
-  user: null
+  user: null,
+  validUsername: false
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case USER_LOADING:
+    case CHECK_USERNAME:
       return {
         ...state,
         isLoading: true
@@ -50,6 +55,18 @@ export default function(state = initialState, action) {
         user: null,
         isAuthenticated: false,
         isLoading: false
+      };
+    case CHECK_USERNAME_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        validUsername: true
+      };
+    case CHECK_USERNAME_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        validUsername: false
       };
     default:
       return state;

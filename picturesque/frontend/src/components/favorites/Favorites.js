@@ -3,21 +3,41 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Breadcrumbs from "../layout/Breadcrumbs";
+import { getUsernameFavorites } from "../../actions/favorites";
 
 export class Favorites extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
-    bounties: PropTypes.array.isRequired,
-    portfolios: PropTypes.array.isRequired
+    favorites: PropTypes.object,
+    getUsernameFavorites: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
   };
 
+  componentDidMount() {
+    const { username } = this.props.match.params;
+    if (
+      this.props.favorites == null ||
+      this.props.favorites.user.username !== username
+    ) {
+      this.props.getUsernameFavorites(username);
+    }
+  }
+
   render() {
+    if (this.props.favorites == null) {
+      return <p>No such user exists</p>;
+    }
+
+    const { username } = this.props.match.params;
+    const { isAuthenticated, user } = this.props.auth;
+    const displayName =
+      isAuthenticated && user.username === username ? "My" : `${username}'s`;
+
     return (
       <div className="container">
         <Breadcrumbs path={this.props.location.pathname} />
         <div className="row">
           <div className="col">
-            <h2 className="text-center">My Favorites</h2>
+            <h2 className="text-center">{displayName} Favorites</h2>
           </div>
         </div>
         <div className="row">
@@ -25,14 +45,14 @@ export class Favorites extends Component {
             <h3 className="text-info">Bounties</h3>
           </div>
         </div>
-        {this.props.bounties.length == 0 ? (
+        {this.props.favorites.bounties.length == 0 ? (
           <div className="row p-2 border-top align-items-center">
             <div className="col">
-              <h4>You have no favorite bounties</h4>
+              <h4>No bounties have been favorited</h4>
             </div>
           </div>
         ) : (
-          this.props.bounties.map(bounty => (
+          this.props.favorites.bounties.map(bounty => (
             <div
               className="row p-2 border-top align-items-center"
               key={bounty.id}
@@ -60,14 +80,14 @@ export class Favorites extends Component {
             <h3 className="text-info mt-5">Portfolios</h3>
           </div>
         </div>
-        {this.props.portfolios.length == 0 ? (
+        {this.props.favorites.portfolios.length == 0 ? (
           <div className="row p-2 border-top align-items-center">
             <div className="col">
-              <h4>You have no favorite portfolios</h4>
+              <h4>No portfolios have been favorited</h4>
             </div>
           </div>
         ) : (
-          this.props.portfolios.map(portfolio => (
+          this.props.favorites.portfolios.map(portfolio => (
             <div
               className="row p-2 border-top align-items-center"
               key={portfolio.id}
@@ -88,11 +108,10 @@ export class Favorites extends Component {
 }
 
 const mapStateToProps = state => ({
-  bounties: state.favorites.bounties,
-  portfolios: state.favorites.portfolios,
-  user: state.auth.user
+  favorites: state.favorites.accountFavorites,
+  auth: state.auth
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { getUsernameFavorites };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

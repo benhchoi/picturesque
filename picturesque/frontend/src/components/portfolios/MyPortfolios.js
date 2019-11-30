@@ -2,26 +2,42 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getMyPortfolios } from "../../actions/portfolios";
+import { checkUsername } from "../../actions/auth";
 import { Link } from "react-router-dom";
 import Breadcrumbs from "../layout/Breadcrumbs";
 
 export class MyPortfolios extends Component {
   static propTypes = {
     portfolios: PropTypes.array.isRequired,
-    getMyPortfolios: PropTypes.func.isRequired
+    getMyPortfolios: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    checkUsername: PropTypes.func.isRequired
   };
 
   componentDidMount() {
-    this.props.getMyPortfolios();
+    const { username } = this.props.match.params;
+    this.props.checkUsername(username);
+    this.props.getMyPortfolios(username);
   }
 
   render() {
+    if (this.props.auth.isLoading) {
+      return <p>Loading...</p>;
+    } else if (!this.props.auth.validUsername) {
+      return <p>No such user exists</p>;
+    }
+
+    const { username } = this.props.match.params;
+    const { isAuthenticated, user } = this.props.auth;
+    const displayName =
+      isAuthenticated && user.username === username ? "My" : `${username}'s`;
+
     return (
       <div className="container">
         <Breadcrumbs path={this.props.location.pathname} />
         <div className="row">
           <div className="col">
-            <h2 className="text-center">My portfolios</h2>
+            <h2 className="text-center">{displayName} portfolios</h2>
           </div>
         </div>
         {this.props.portfolios.map(portfolio => (
@@ -44,9 +60,10 @@ export class MyPortfolios extends Component {
 }
 
 const mapStateToProps = state => ({
-  portfolios: state.portfolios.portfolios
+  portfolios: state.portfolios.portfolios,
+  auth: state.auth
 });
 
-const mapDispatchToProps = { getMyPortfolios };
+const mapDispatchToProps = { getMyPortfolios, checkUsername };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPortfolios);

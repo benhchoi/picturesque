@@ -157,8 +157,11 @@ export class Bounty extends Component {
           <div className="col">
             <h2>{this.props.bounty.title}</h2>
             <p className="d-inline">
-              posted by {this.props.bounty.user.username} |{" "}
-              {timeSince(new Date(this.props.bounty.timestamp))} |{" "}
+              posted by{" "}
+              <Link to={`/u/${this.props.bounty.user.username}`}>
+                {this.props.bounty.user.username}
+              </Link>{" "}
+              | {timeSince(new Date(this.props.bounty.timestamp))} |{" "}
             </p>
             <p className="d-inline text-success">${this.props.bounty.price}</p>
             {this.props.bounty.tags.length == 0

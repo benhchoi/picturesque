@@ -24,6 +24,7 @@ import Portfolio from "./portfolios/Portfolio";
 import EditPortfolio from "./portfolios/EditPortfolio";
 import MyPortfolios from "./portfolios/MyPortfolios";
 import Favorites from "./favorites/Favorites";
+import Profile from "./accounts/Profile";
 
 import { Provider } from "react-redux";
 import store from "../store";
@@ -66,7 +67,7 @@ class App extends Component {
                     component={EditBounty}
                   />
                   <Route exact path="/bounties/view/:id" component={Bounty} />
-                  <PrivateRoute
+                  <Route
                     exact
                     path="/u/:username/bounties"
                     component={MyBounties}
@@ -87,16 +88,17 @@ class App extends Component {
                     path="/portfolios/view/:id"
                     component={Portfolio}
                   />
-                  <PrivateRoute
+                  <Route
                     exact
                     path="/u/:username/portfolios"
                     component={MyPortfolios}
                   />
-                  <PrivateRoute
+                  <Route
                     exact
                     path="/u/:username/favorites"
                     component={Favorites}
                   />
+                  <Route exact path="/u/:username" component={Profile} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
                 </Switch>

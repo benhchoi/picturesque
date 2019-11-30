@@ -119,9 +119,15 @@ export const getPortfolio = id => dispatch => {
 };
 
 // get my portfolios
-export const getMyPortfolios = () => (dispatch, getState) => {
+export const getMyPortfolios = username => dispatch => {
+  const config = {
+    params: {
+      username
+    }
+  };
+
   axios
-    .get(`/api/myportfolios/`, tokenConfig(getState))
+    .get(`/api/myportfolios/`, config)
     .then(res => {
       dispatch({
         type: GET_MY_PORTFOLIOS,

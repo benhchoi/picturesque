@@ -1,6 +1,7 @@
 from .models import Portfolio, Artwork
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, mixins
 from .serializers import PortfolioSerializer, ArtworkSerializer
+from django.contrib.auth.models import User
 
 
 # artwork viewset
@@ -28,13 +29,14 @@ class PortfolioViewSet(viewsets.ModelViewSet):
 
 
 # my portfolios view set
-class MyPortfoliosViewSet(viewsets.ReadOnlyModelViewSet):
+class MyPortfoliosViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     permission_classes = [
-        permissions.IsAuthenticated
+        permissions.AllowAny
     ]
     serializer_class = PortfolioSerializer
 
     def get_queryset(self):
-        queryset = self.request.user.portfolios.all()
+        queryset = User.objects.get_by_natural_key(
+            self.request.query_params['username']).portfolios.all()
         queryset = self.get_serializer_class().setup_eager_loading(queryset)
         return queryset

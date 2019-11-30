@@ -55,8 +55,11 @@ export class Portfolios extends Component {
                 </Link>
               </h4>
               <p className="d-inline">
-                posted by {portfolio.user.username} |{" "}
-                {timeSince(new Date(portfolio.timestamp))} |{" "}
+                posted by{" "}
+                <Link to={`/u/${portfolio.user.username}`}>
+                  {portfolio.user.username}
+                </Link>{" "}
+                | {timeSince(new Date(portfolio.timestamp))} |{" "}
               </p>
               <p className="d-inline text-success">${portfolio.rate}</p>
               {portfolio.tags.length == 0

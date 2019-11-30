@@ -8,7 +8,10 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGSITER_FAIL
+  REGSITER_FAIL,
+  CHECK_USERNAME_SUCCESS,
+  CHECK_USERNAME_FAIL,
+  CHECK_USERNAME
 } from "./types";
 import { getFavorites } from "./favorites";
 
@@ -112,6 +115,25 @@ export const logout = () => (dispatch, getState) => {
       dispatch({
         type: AUTH_ERROR
       });
+    });
+};
+
+// check to see if account username exists
+export const checkUsername = username => dispatch => {
+  dispatch({ type: CHECK_USERNAME });
+
+  const config = {
+    params: {
+      username
+    }
+  };
+
+  axios
+    .get("/api/account", config)
+    .then(res => dispatch({ type: CHECK_USERNAME_SUCCESS }))
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({ type: CHECK_USERNAME_FAIL });
     });
 };
 

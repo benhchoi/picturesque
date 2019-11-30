@@ -55,8 +55,11 @@ export class Bounties extends Component {
                   <Link to={`/bounties/view/${bounty.id}`}>{bounty.title}</Link>
                 </h4>
                 <p className="d-inline">
-                  posted by {bounty.user.username} |{" "}
-                  {timeSince(new Date(bounty.timestamp))} |{" "}
+                  posted by{" "}
+                  <Link to={`/u/${bounty.user.username}`}>
+                    {bounty.user.username}
+                  </Link>{" "}
+                  | {timeSince(new Date(bounty.timestamp))} |{" "}
                 </p>
                 <p className="d-inline text-success">${bounty.price}</p>
                 {bounty.tags.length == 0

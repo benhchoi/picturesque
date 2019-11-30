@@ -29,6 +29,9 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGSITER_FAIL = "REGISTER_FAIL";
+export const CHECK_USERNAME = "CHECK_USERNAME";
+export const CHECK_USERNAME_SUCCESS = "CHECK_USERNAME_SUCCESS";
+export const CHECK_USERNAME_FAIL = "CHECK_USERNAME_FAIL";
 
 // err and message related stuff
 export const GET_ERRORS = "GET_ERRORS";
@@ -37,3 +40,4 @@ export const CREATE_MESSAGE = "CREATE_MESSAGE";
 // favorites related stuff
 export const GET_FAVORITES = "GET_FAVORITES";
 export const UPDATE_FAVORITES = "UPDATE_FAVORITES";
+export const GET_USERNAME_FAVORITES = "GET_USERNAME_FAVORITES";
