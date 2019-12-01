@@ -31,9 +31,7 @@ export class EditBounty extends Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.getRefArts();
-    if (this.props.bounty == null || this.props.bounty.id != id) {
-      this.props.getBounty(id);
-    }
+    this.props.getBounty(id);
   }
 
   componentDidUpdate(prevProps) {
