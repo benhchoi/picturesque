@@ -58,12 +58,12 @@ export class Favorites extends Component {
                     </div>
                   </div>
                 ) : (
-                  this.props.favorites.bounties.map((bounty, i, bounties) => (
+                  this.props.favorites.bounties.map((bounty, i) => (
                     <div
                       className={
-                        i == bounties.length - 1
-                          ? "row align-items-center p-2"
-                          : "row align-items-center p-2 border-bottom"
+                        i == 0
+                          ? "row align-items-center"
+                          : "row align-items-center pt-2 border-top"
                       }
                       key={bounty.id}
                     >
@@ -105,26 +105,24 @@ export class Favorites extends Component {
                     </div>
                   </div>
                 ) : (
-                  this.props.favorites.portfolios.map(
-                    (portfolio, i, portfolios) => (
-                      <div
-                        className={
-                          i == portfolios.length - 1
-                            ? "row align-items-center p-2"
-                            : "row align-items-center p-2 border-bottom"
-                        }
-                        key={portfolio.id}
-                      >
-                        <div className="col">
-                          <h4>
-                            <Link to={`/portfolios/view/${portfolio.id}`}>
-                              {portfolio.title}
-                            </Link>
-                          </h4>
-                        </div>
+                  this.props.favorites.portfolios.map((portfolio, i) => (
+                    <div
+                      className={
+                        i == 0
+                          ? "row align-items-center"
+                          : "row align-items-center pt-2 border-top"
+                      }
+                      key={portfolio.id}
+                    >
+                      <div className="col">
+                        <h4>
+                          <Link to={`/portfolios/view/${portfolio.id}`}>
+                            {portfolio.title}
+                          </Link>
+                        </h4>
                       </div>
-                    )
-                  )
+                    </div>
+                  ))
                 )}
               </div>
             </div>

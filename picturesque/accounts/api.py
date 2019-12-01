@@ -14,6 +14,7 @@ class RegisterAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         _, token = AuthToken.objects.create(user)  # _ is instance
+        _ = user.favorites
 
         return Response({
             'user': UserSerializer(
