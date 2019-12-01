@@ -40,68 +40,96 @@ export class Favorites extends Component {
             <h2 className="text-center">{displayName} Favorites</h2>
           </div>
         </div>
-        <div className="row">
-          <div className="col">
-            <h3 className="text-info">Bounties</h3>
-          </div>
-        </div>
-        {this.props.favorites.bounties.length == 0 ? (
-          <div className="row p-2 border-top align-items-center">
-            <div className="col">
-              <h4>No bounties have been favorited</h4>
-            </div>
-          </div>
-        ) : (
-          this.props.favorites.bounties.map(bounty => (
+        <div className="accordian">
+          <div className="card">
             <div
-              className="row p-2 border-top align-items-center"
-              key={bounty.id}
+              className="card-header clickable"
+              data-toggle="collapse"
+              data-target="#bounties"
             >
-              <div className="col">
-                <h4>
-                  {bounty.completed ? (
-                    <del>
-                      <Link to={`/bounties/view/${bounty.id}`}>
-                        {bounty.title}
-                      </Link>
-                    </del>
-                  ) : (
-                    <Link to={`/bounties/view/${bounty.id}`}>
-                      {bounty.title}
-                    </Link>
-                  )}
-                </h4>
+              <h3 className="text-info">Bounties</h3>
+            </div>
+            <div className="collapse show" id="bounties">
+              <div className="card-body">
+                {this.props.favorites.bounties.length == 0 ? (
+                  <div className="row align-items-center">
+                    <div className="col">
+                      <h4>No bounties have been favorited</h4>
+                    </div>
+                  </div>
+                ) : (
+                  this.props.favorites.bounties.map((bounty, i, bounties) => (
+                    <div
+                      className={
+                        i == bounties.length - 1
+                          ? "row align-items-center p-2"
+                          : "row align-items-center p-2 border-bottom"
+                      }
+                      key={bounty.id}
+                    >
+                      <div className="col">
+                        <h4>
+                          {bounty.completed ? (
+                            <del>
+                              <Link to={`/bounties/view/${bounty.id}`}>
+                                {bounty.title}
+                              </Link>
+                            </del>
+                          ) : (
+                            <Link to={`/bounties/view/${bounty.id}`}>
+                              {bounty.title}
+                            </Link>
+                          )}
+                        </h4>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
-          ))
-        )}
-        <div className="row">
-          <div className="col">
-            <h3 className="text-info mt-5">Portfolios</h3>
           </div>
-        </div>
-        {this.props.favorites.portfolios.length == 0 ? (
-          <div className="row p-2 border-top align-items-center">
-            <div className="col">
-              <h4>No portfolios have been favorited</h4>
-            </div>
-          </div>
-        ) : (
-          this.props.favorites.portfolios.map(portfolio => (
+          <div className="card">
             <div
-              className="row p-2 border-top align-items-center"
-              key={portfolio.id}
+              className="card-header clickable"
+              data-toggle="collapse"
+              data-target="#portfolios"
             >
-              <div className="col">
-                <h4>
-                  <Link to={`/portfolios/view/${portfolio.id}`}>
-                    {portfolio.title}
-                  </Link>
-                </h4>
+              <h3 className="text-info">Portfolios</h3>
+            </div>
+            <div className="collapse show" id="portfolios">
+              <div className="card-body">
+                {this.props.favorites.portfolios.length == 0 ? (
+                  <div className="row align-items-center">
+                    <div className="col">
+                      <h4>No portfolios have been favorited</h4>
+                    </div>
+                  </div>
+                ) : (
+                  this.props.favorites.portfolios.map(
+                    (portfolio, i, portfolios) => (
+                      <div
+                        className={
+                          i == portfolios.length - 1
+                            ? "row align-items-center p-2"
+                            : "row align-items-center p-2 border-bottom"
+                        }
+                        key={portfolio.id}
+                      >
+                        <div className="col">
+                          <h4>
+                            <Link to={`/portfolios/view/${portfolio.id}`}>
+                              {portfolio.title}
+                            </Link>
+                          </h4>
+                        </div>
+                      </div>
+                    )
+                  )
+                )}
               </div>
             </div>
-          ))
-        )}
+          </div>
+        </div>
       </div>
     );
   }
