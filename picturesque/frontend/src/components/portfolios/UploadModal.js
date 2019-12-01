@@ -47,6 +47,9 @@ export class UploadModal extends Component {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">Upload</h5>
+              <button type="button" className="close" data-dismiss="modal">
+                <span>&times;</span>
+              </button>
             </div>
             <div className="modal-body">
               <form>
@@ -129,7 +132,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = { uploadArtwork };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UploadModal);
+export default connect(mapStateToProps, mapDispatchToProps)(UploadModal);

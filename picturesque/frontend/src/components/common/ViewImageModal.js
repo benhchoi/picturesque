@@ -18,6 +18,11 @@ export default class ViewImageModal extends Component {
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="close" data-dismiss="modal">
+                <span>&times;</span>
+              </button>
+            </div>
             <div className="modal-body">
               {!this.props.image ? (
                 <p className="text-center">Image not found</p>
