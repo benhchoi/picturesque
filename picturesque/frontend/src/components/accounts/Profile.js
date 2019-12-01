@@ -31,33 +31,37 @@ export class Profile extends Component {
     return (
       <div className="container">
         <Breadcrumbs path={this.props.location.pathname} />
-        <div className="row">
+        <div className="row vertical-center">
           <div className="col">
-            <h1 className="text-center">
-              I would like to see {displayName}...
-            </h1>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <div className="jumbotron">
-              <Link to={`/u/${username}/favorites`}>
-                <h2 className="text-center">Favorites</h2>
-              </Link>
+            <div className="row">
+              <div className="col">
+                <h1 className="text-center">
+                  I would like to see {displayName}...
+                </h1>
+              </div>
             </div>
-          </div>
-          <div className="col">
-            <div className="jumbotron">
-              <Link to={`/u/${username}/bounties`}>
-                <h2 className="text-center">Bounties</h2>
-              </Link>
-            </div>
-          </div>
-          <div className="col">
-            <div className="jumbotron">
-              <Link to={`/u/${username}/portfolios`}>
-                <h2 className="text-center">Portfolios</h2>
-              </Link>
+            <div className="row">
+              <div className="col">
+                <div className="jumbotron">
+                  <Link to={`/u/${username}/favorites`}>
+                    <h2 className="text-center">Favorites</h2>
+                  </Link>
+                </div>
+              </div>
+              <div className="col">
+                <div className="jumbotron">
+                  <Link to={`/u/${username}/bounties`}>
+                    <h2 className="text-center">Bounties</h2>
+                  </Link>
+                </div>
+              </div>
+              <div className="col">
+                <div className="jumbotron">
+                  <Link to={`/u/${username}/portfolios`}>
+                    <h2 className="text-center">Portfolios</h2>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>

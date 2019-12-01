@@ -29,21 +29,15 @@ export class Header extends Component {
           <div className="dropdown-menu">
             <Link
               className="dropdown-item"
-              to={isAuthenticated ? `/u/${user.username}/favorites` : "#"}
+              to={isAuthenticated ? "/create" : "#"}
             >
-              My Favorites
+              Create
             </Link>
             <Link
               className="dropdown-item"
-              to={isAuthenticated ? `/u/${user.username}/bounties` : "#"}
+              to={isAuthenticated ? `/u/${user.username}` : "#"}
             >
-              My Bounties
-            </Link>
-            <Link
-              className="dropdown-item"
-              to={isAuthenticated ? `/u/${user.username}/portfolios` : "#"}
-            >
-              My Portfolios
+              My Stuff
             </Link>
             <div className="dropdown-divider"></div>
             <button className="dropdown-item" onClick={this.props.logout}>
@@ -65,7 +59,7 @@ export class Header extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-light bg-light m-2">
+      <nav className="navbar navbar-expand-sm navbar-light bg-light">
         <div className="container">
           <a className="navbar-brand" href="#">
             Picturesque

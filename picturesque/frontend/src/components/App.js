@@ -13,6 +13,7 @@ import PrivateRoute from "./common/PrivateRoute";
 import Home from "./home/Home";
 import Buy from "./home/Buy";
 import Sell from "./home/Sell";
+import Create from "./home/Create";
 import Bounties from "./bounties/Bounties";
 import CreateBounty from "./bounties/CreateBounty";
 import Bounty from "./bounties/Bounty";
@@ -54,13 +55,18 @@ class App extends Component {
                   <Route exact path="/" component={Home} />
                   <Route exact path="/buy" component={Buy} />
                   <Route exact path="/sell" component={Sell} />
-
-                  <Route exact path="/bounties" component={Bounties} />
+                  <PrivateRoute exact path="/create" component={Create} />
                   <PrivateRoute
                     exact
-                    path="/bounties/create"
+                    path="/create/bounty"
                     component={CreateBounty}
                   />
+                  <PrivateRoute
+                    exact
+                    path="/create/portfolio"
+                    component={CreatePortfolio}
+                  />
+                  <Route exact path="/bounties" component={Bounties} />
                   <PrivateRoute
                     exact
                     path="/bounties/edit/:id"
@@ -73,11 +79,6 @@ class App extends Component {
                     component={MyBounties}
                   />
                   <Route exact path="/portfolios" component={Portfolios} />
-                  <PrivateRoute
-                    exact
-                    path="/portfolios/create"
-                    component={CreatePortfolio}
-                  />
                   <PrivateRoute
                     exact
                     path="/portfolios/edit/:id"

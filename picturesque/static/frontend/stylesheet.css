@@ -27,3 +27,11 @@
 .selected {
   background: deepskyblue;
 }
+
+.vertical-center {
+  min-height: 70%; /* Fallback for browsers do NOT support vh unit */
+  min-height: 70vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
