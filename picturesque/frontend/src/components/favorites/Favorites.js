@@ -14,12 +14,7 @@ export class Favorites extends Component {
 
   componentDidMount() {
     const { username } = this.props.match.params;
-    if (
-      this.props.favorites == null ||
-      this.props.favorites.user.username !== username
-    ) {
-      this.props.getUsernameFavorites(username);
-    }
+    this.props.getUsernameFavorites(username);
   }
 
   render() {
@@ -54,7 +49,7 @@ export class Favorites extends Component {
                 {this.props.favorites.bounties.length == 0 ? (
                   <div className="row align-items-center">
                     <div className="col">
-                      <h4>No bounties have been favorited</h4>
+                      <h4>No favorited bounties to show</h4>
                     </div>
                   </div>
                 ) : (
@@ -101,7 +96,7 @@ export class Favorites extends Component {
                 {this.props.favorites.portfolios.length == 0 ? (
                   <div className="row align-items-center">
                     <div className="col">
-                      <h4>No portfolios have been favorited</h4>
+                      <h4>No favorited portfolios to show</h4>
                     </div>
                   </div>
                 ) : (

@@ -14,10 +14,24 @@ export class MyBounties extends Component {
     checkUsername: PropTypes.func.isRequired
   };
 
+  state = {
+    incomplete: [],
+    completed: []
+  };
+
   componentDidMount() {
     const { username } = this.props.match.params;
     this.props.checkUsername(username);
     this.props.getMyBounties(username);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.bounties !== this.props.bounties) {
+      this.setState((_, props) => ({
+        incomplete: props.bounties.filter(bounty => !bounty.completed),
+        completed: props.bounties.filter(bounty => bounty.completed)
+      }));
+    }
   }
 
   render() {
@@ -40,26 +54,86 @@ export class MyBounties extends Component {
             <h2 className="text-center">{displayName} Bounties</h2>
           </div>
         </div>
-        {this.props.bounties.map(bounty => (
-          <div
-            className="row p-2 border-top align-items-center"
-            key={bounty.id}
-          >
-            <div className="col">
-              <h4>
-                {bounty.completed ? (
-                  <del>
-                    <Link to={`/bounties/view/${bounty.id}`}>
-                      {bounty.title}
-                    </Link>
-                  </del>
+        <div className="accordian">
+          <div className="card">
+            <div
+              className="card-header clickable"
+              data-toggle="collapse"
+              data-target="#incomplete"
+            >
+              <h3 className="text-info">Incomplete</h3>
+            </div>
+            <div className="collapse show" id="incomplete">
+              <div className="card-body">
+                {this.state.incomplete.length == 0 ? (
+                  <div className="row align-items-center">
+                    <div className="col">
+                      <h4>No incomplete bounties to show</h4>
+                    </div>
+                  </div>
                 ) : (
-                  <Link to={`/bounties/view/${bounty.id}`}>{bounty.title}</Link>
+                  this.state.incomplete.map((bounty, i) => (
+                    <div
+                      className={
+                        i == 0
+                          ? "row align-items-center"
+                          : "row align-items-center pt-2 border-top"
+                      }
+                      key={bounty.id}
+                    >
+                      <div className="col">
+                        <h4>
+                          <Link to={`/bounties/view/${bounty.id}`}>
+                            {bounty.title}
+                          </Link>
+                        </h4>
+                      </div>
+                    </div>
+                  ))
                 )}
-              </h4>
+              </div>
             </div>
           </div>
-        ))}
+          <div className="card">
+            <div
+              className="card-header clickable"
+              data-toggle="collapse"
+              data-target="#completed"
+            >
+              <h3 className="text-success">Completed</h3>
+            </div>
+            <div className="collapse show" id="completed">
+              <div className="card-body">
+                {this.state.completed.length == 0 ? (
+                  <div className="row align-items-center">
+                    <div className="col">
+                      <h4>No completed bounties to show</h4>
+                    </div>
+                  </div>
+                ) : (
+                  this.state.completed.map((bounty, i) => (
+                    <div
+                      className={
+                        i == 0
+                          ? "row align-items-center"
+                          : "row align-items-center pt-2 border-top"
+                      }
+                      key={bounty.id}
+                    >
+                      <div className="col">
+                        <h4>
+                          <Link to={`/bounties/view/${bounty.id}`}>
+                            {bounty.title}
+                          </Link>
+                        </h4>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

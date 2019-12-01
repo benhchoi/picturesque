@@ -40,20 +40,32 @@ export class MyPortfolios extends Component {
             <h2 className="text-center">{displayName} portfolios</h2>
           </div>
         </div>
-        {this.props.portfolios.map(portfolio => (
-          <div
-            className="row p-2 border-top align-items-center"
-            key={portfolio.id}
-          >
+        {this.props.portfolios.length == 0 ? (
+          <div className="row align-items-center">
             <div className="col">
-              <h4>
-                <Link to={`/portfolios/view/${portfolio.id}`}>
-                  {portfolio.title}
-                </Link>
-              </h4>
+              <h4>No portfolios to show</h4>
             </div>
           </div>
-        ))}
+        ) : (
+          this.props.portfolios.map((portfolio, i) => (
+            <div
+              className={
+                i == 0
+                  ? "row align-items-center"
+                  : "row align-items-center pt-2 border-top"
+              }
+              key={portfolio.id}
+            >
+              <div className="col">
+                <h4>
+                  <Link to={`/portfolios/view/${portfolio.id}`}>
+                    {portfolio.title}
+                  </Link>
+                </h4>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     );
   }
