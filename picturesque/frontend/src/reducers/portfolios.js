@@ -23,7 +23,7 @@ export default function(state = initialState, action) {
     case GET_MY_PORTFOLIOS:
       return {
         ...state,
-        portfolios: action.payload.reverse()
+        portfolios: action.payload
       };
     case DELETE_PORTFOLIO:
       return {

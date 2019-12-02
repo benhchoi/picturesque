@@ -13,7 +13,7 @@ class ReferenceArtViewSet(viewsets.ModelViewSet):
     serializer_class = ReferenceArtSerializer
 
     def get_queryset(self):
-        return self.request.user.reference_arts.all()
+        return self.request.user.reference_arts.all().order_by('-id')
 
 
 # bounty viewset
@@ -24,7 +24,7 @@ class BountyViewSet(viewsets.ModelViewSet):
     serializer_class = BountySerializer
 
     def get_queryset(self):
-        queryset = Bounty.objects.all()
+        queryset = Bounty.objects.all().order_by('-timestamp')
         queryset = self.get_serializer_class().setup_eager_loading(queryset)
         return queryset
 
@@ -37,7 +37,8 @@ class MyBountiesViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = BountySerializer
 
     def get_queryset(self):
-        queryset = User.objects.get_by_natural_key(
-            self.request.query_params['username']).bounties.all()
+        queryset = User.objects\
+            .get_by_natural_key(self.request.query_params['username'])\
+            .bounties.all().order_by('-timestamp')
         queryset = self.get_serializer_class().setup_eager_loading(queryset)
         return queryset

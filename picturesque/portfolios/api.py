@@ -12,7 +12,7 @@ class ArtworkViewSet(viewsets.ModelViewSet):
     serializer_class = ArtworkSerializer
 
     def get_queryset(self):
-        return self.request.user.artworks.all()
+        return self.request.user.artworks.all().order_by('-id')
 
 
 # portfolio viewset
@@ -23,7 +23,7 @@ class PortfolioViewSet(viewsets.ModelViewSet):
     serializer_class = PortfolioSerializer
 
     def get_queryset(self):
-        queryset = Portfolio.objects.all()
+        queryset = Portfolio.objects.all().order_by('-timestamp')
         queryset = self.get_serializer_class().setup_eager_loading(queryset)
         return queryset
 
@@ -36,7 +36,8 @@ class MyPortfoliosViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = PortfolioSerializer
 
     def get_queryset(self):
-        queryset = User.objects.get_by_natural_key(
-            self.request.query_params['username']).portfolios.all()
+        queryset = User\
+            .objects.get_by_natural_key(self.request.query_params['username'])\
+            .portfolios.all().order_by('-timestamp')
         queryset = self.get_serializer_class().setup_eager_loading(queryset)
         return queryset
