@@ -5,6 +5,7 @@ import { getMyBounties } from "../../actions/bounties";
 import { checkUsername } from "../../actions/auth";
 import { Link } from "react-router-dom";
 import Breadcrumbs from "../layout/Breadcrumbs";
+import MyBountyHeader from "./MyBountyHeader";
 
 export class MyBounties extends Component {
   static propTypes = {
@@ -76,17 +77,13 @@ export class MyBounties extends Component {
                     <div
                       className={
                         i == 0
-                          ? "row align-items-center"
-                          : "row align-items-center pt-2 border-top"
+                          ? "row align-items-center p-2"
+                          : "row align-items-center p-2 border-top"
                       }
                       key={bounty.id}
                     >
                       <div className="col">
-                        <h4>
-                          <Link to={`/bounties/view/${bounty.id}`}>
-                            {bounty.title}
-                          </Link>
-                        </h4>
+                        <MyBountyHeader bounty={bounty} />
                       </div>
                     </div>
                   ))
@@ -115,17 +112,13 @@ export class MyBounties extends Component {
                     <div
                       className={
                         i == 0
-                          ? "row align-items-center"
-                          : "row align-items-center pt-2 border-top"
+                          ? "row align-items-center p-2"
+                          : "row align-items-center p-2 border-top"
                       }
                       key={bounty.id}
                     >
                       <div className="col">
-                        <h4>
-                          <Link to={`/bounties/view/${bounty.id}`}>
-                            {bounty.title}
-                          </Link>
-                        </h4>
+                        <MyBountyHeader bounty={bounty} />
                       </div>
                     </div>
                   ))

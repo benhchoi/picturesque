@@ -45,8 +45,11 @@ export class Portfolios extends Component {
             <h2 className="text-center">Portfolios</h2>
           </div>
         </div>
-        {this.props.portfolios.map(portfolio => (
-          <div className="row p-2 border-top" key={portfolio.id}>
+        {this.props.portfolios.map((portfolio, i) => (
+          <div
+            className={i === 0 ? "row p-2" : "row p-2 border-top"}
+            key={portfolio.id}
+          >
             <div className="col">
               <PortfolioHeader portfolio={portfolio} linkTitle={true} />
               <ScrollingImages

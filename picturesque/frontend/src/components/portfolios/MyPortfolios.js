@@ -5,6 +5,7 @@ import { getMyPortfolios } from "../../actions/portfolios";
 import { checkUsername } from "../../actions/auth";
 import { Link } from "react-router-dom";
 import Breadcrumbs from "../layout/Breadcrumbs";
+import MyPortfolioHeader from "./MyPortfolioHeader";
 
 export class MyPortfolios extends Component {
   static propTypes = {
@@ -51,17 +52,13 @@ export class MyPortfolios extends Component {
             <div
               className={
                 i == 0
-                  ? "row align-items-center"
-                  : "row align-items-center pt-2 border-top"
+                  ? "row align-items-center p-2"
+                  : "row align-items-center p-2 border-top"
               }
               key={portfolio.id}
             >
               <div className="col">
-                <h4>
-                  <Link to={`/portfolios/view/${portfolio.id}`}>
-                    {portfolio.title}
-                  </Link>
-                </h4>
+                <MyPortfolioHeader portfolio={portfolio} />
               </div>
             </div>
           ))

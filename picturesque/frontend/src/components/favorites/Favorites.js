@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import Breadcrumbs from "../layout/Breadcrumbs";
 import { getUsernameFavorites } from "../../actions/favorites";
+import MyBountyHeader from "../bounties/MyBountyHeader";
+import MyPortfolioHeader from "../portfolios/MyPortfolioHeader";
 
 export class Favorites extends Component {
   static propTypes = {
@@ -57,25 +58,13 @@ export class Favorites extends Component {
                     <div
                       className={
                         i == 0
-                          ? "row align-items-center"
-                          : "row align-items-center pt-2 border-top"
+                          ? "row align-items-center p-2"
+                          : "row align-items-center p-2 border-top"
                       }
                       key={bounty.id}
                     >
                       <div className="col">
-                        <h4>
-                          {bounty.completed ? (
-                            <del>
-                              <Link to={`/bounties/view/${bounty.id}`}>
-                                {bounty.title}
-                              </Link>
-                            </del>
-                          ) : (
-                            <Link to={`/bounties/view/${bounty.id}`}>
-                              {bounty.title}
-                            </Link>
-                          )}
-                        </h4>
+                        <MyBountyHeader bounty={bounty} />
                       </div>
                     </div>
                   ))
@@ -104,17 +93,13 @@ export class Favorites extends Component {
                     <div
                       className={
                         i == 0
-                          ? "row align-items-center"
-                          : "row align-items-center pt-2 border-top"
+                          ? "row align-items-center p-2"
+                          : "row align-items-center p-2 border-top"
                       }
                       key={portfolio.id}
                     >
                       <div className="col">
-                        <h4>
-                          <Link to={`/portfolios/view/${portfolio.id}`}>
-                            {portfolio.title}
-                          </Link>
-                        </h4>
+                        <MyPortfolioHeader portfolio={portfolio} />
                       </div>
                     </div>
                   ))

@@ -47,8 +47,11 @@ export class Bounties extends Component {
         </div>
         {this.props.bounties
           .filter(bounty => !bounty.completed)
-          .map(bounty => (
-            <div className="row p-2 border-top" key={bounty.id}>
+          .map((bounty, i) => (
+            <div
+              className={i === 0 ? "row p-2" : "row p-2 border-top"}
+              key={bounty.id}
+            >
               <div className="col">
                 <BountyHeader bounty={bounty} linkTitle={true} />
                 <ScrollingImages

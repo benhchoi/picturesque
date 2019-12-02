@@ -18,7 +18,7 @@ export default class Create extends Component {
               <div className="col">
                 <div className="jumbotron">
                   <Link to="/create/bounty">
-                    <h2 className="text-center">Commission Request (Bounty)</h2>
+                    <h2 className="text-center">Bounty</h2>
                   </Link>
                 </div>
               </div>
