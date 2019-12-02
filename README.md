@@ -15,3 +15,6 @@ citation links:
 - dealing with drf nested serializers: <https://stackoverflow.com/questions/41312558/django-rest-framework-post-nested-objects>
 - how to access params from react router: <https://stackoverflow.com/questions/45898789/react-router-pass-param-to-component>
 - using different serializers for request and reply: <https://stackoverflow.com/questions/51207089/use-different-serializer-for-request-and-reply>
+- fontawesome: <https://www.w3schools.com/bootstrap4/bootstrap_icons.asp>
+- using fontawesome: <https://www.w3schools.com/icons/icons_reference.asp>
+- btn-xs: <https://stackoverflow.com/questions/33911049/btn-xs-no-longer-a-valid-option-in-bootstrap-4>

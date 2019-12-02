@@ -23,14 +23,12 @@ export default function(state = initialState, action) {
     case GET_MY_BOUNTIES:
       return {
         ...state,
-        bounties: action.payload.reverse()
+        bounties: action.payload
       };
     case DELETE_BOUNTY:
       return {
         ...state,
-        bounties: state.bounties.filter(
-          bounty => bounty.id !== action.payload.id
-        ),
+        bounties: state.bounties.filter(bounty => bounty.id !== action.payload),
         bounty: null
       };
     case UPLOAD_REFART:
@@ -49,11 +47,18 @@ export default function(state = initialState, action) {
         refArt: action.payload
       };
     case GET_BOUNTY:
-    case EDIT_BOUNTY:
     case ADD_BOUNTY:
       return {
         ...state,
         bounty: action.payload
+      };
+    case EDIT_BOUNTY:
+      return {
+        ...state,
+        bounty: action.payload,
+        bounties: state.bounties.map(bounty =>
+          bounty.id === action.payload.id ? action.payload : bounty
+        )
       };
     default:
       return state;

@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getBounties } from "../../actions/bounties";
-import { timeSince } from "../../actions/utility";
 import ScrollingImages from "../common/ScrollingImages";
 import ViewImageModal from "../common/ViewImageModal";
-import { Link } from "react-router-dom";
 import Breadcrumbs from "../layout/Breadcrumbs";
+import BountyHeader from "./BountyHeader";
 
 export class Bounties extends Component {
   static propTypes = {
@@ -51,27 +50,7 @@ export class Bounties extends Component {
           .map(bounty => (
             <div className="row p-2 border-top" key={bounty.id}>
               <div className="col">
-                <h4>
-                  <Link to={`/bounties/view/${bounty.id}`}>{bounty.title}</Link>
-                </h4>
-                <p className="d-inline">
-                  posted by{" "}
-                  <Link to={`/u/${bounty.user.username}`}>
-                    {bounty.user.username}
-                  </Link>{" "}
-                  | {timeSince(new Date(bounty.timestamp))} |{" "}
-                </p>
-                <p className="d-inline text-success">${bounty.price}</p>
-                {bounty.tags.length == 0
-                  ? ""
-                  : bounty.tags.map(tag => {
-                      return (
-                        <div key={tag} className="d-inline">
-                          <p className="d-inline"> | </p>
-                          <p className="d-inline text-info">#{tag}</p>
-                        </div>
-                      );
-                    })}
+                <BountyHeader bounty={bounty} linkTitle={true} />
                 <ScrollingImages
                   images={bounty.reference_arts}
                   onClick={this.selectImage}

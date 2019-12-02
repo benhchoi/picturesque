@@ -19,25 +19,23 @@ export default class ScrollingImages extends Component {
     }
 
     return (
-      <div className="container">
-        <div className="scrolling-wrapper border m-2">
-          {this.props.images.map(image => (
-            <img
-              key={image.id}
-              id={image.id}
-              src={image.image}
-              alt={image.description}
-              className={
-                this.props.selected.has(image.id)
-                  ? "img-thumbnail scrolling-card selected"
-                  : "img-thumbnail scrolling-card"
-              }
-              onClick={this.props.onClick}
-              data-toggle="modal"
-              data-target={`#${this.props.modalTarget}`}
-            />
-          ))}
-        </div>
+      <div className="scrolling-wrapper border m-2">
+        {this.props.images.map(image => (
+          <img
+            key={image.id}
+            id={image.id}
+            src={image.image}
+            alt={image.description}
+            className={
+              this.props.selected.has(image.id)
+                ? "img-thumbnail scrolling-card selected"
+                : "img-thumbnail scrolling-card"
+            }
+            onClick={this.props.onClick}
+            data-toggle="modal"
+            data-target={`#${this.props.modalTarget}`}
+          />
+        ))}
       </div>
     );
   }
