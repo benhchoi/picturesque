@@ -38,7 +38,7 @@ export class EditPortfolio extends Component {
     this.props.getPortfolio(this.props.match.params.id);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     if (
       !this.state.initialized &&
       this.props.portfolio != null &&
@@ -55,12 +55,6 @@ export class EditPortfolio extends Component {
         initialized: true
       });
     }
-
-    if (prevProps.portfolio !== this.props.portfolio) {
-      this.setState({
-        edited: true
-      });
-    }
   }
 
   onPublish = e => {
@@ -71,6 +65,8 @@ export class EditPortfolio extends Component {
     const artworks = [...selected];
     const portfolio = { id, title, description, tags, rate, artworks };
     this.props.editPortfolio(portfolio);
+
+    this.setState({ edited: true });
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });

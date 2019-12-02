@@ -34,7 +34,7 @@ export class EditBounty extends Component {
     this.props.getBounty(id);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     if (
       !this.state.initialized &&
       this.props.bounty != null &&
@@ -67,6 +67,7 @@ export class EditBounty extends Component {
     const reference_arts = [...selected].map(Number);
     const bounty = { id, title, description, tags, price, reference_arts };
     this.props.editBounty(bounty);
+
     this.setState({ edited: true });
   };
 

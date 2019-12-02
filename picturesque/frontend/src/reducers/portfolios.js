@@ -29,7 +29,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         portfolios: state.portfolios.filter(
-          portfolio => portfolio.id !== action.payload.id
+          portfolio => portfolio.id !== action.payload
         ),
         portfolio: null
       };
@@ -55,6 +55,15 @@ export default function(state = initialState, action) {
         ...state,
         portfolio: action.payload
       };
+    case EDIT_PORTFOLIO:
+      return {
+        ...state,
+        portfolio: action.payload,
+        portfolios: state.portfolios.map(portfolio =>
+          portfolio.id === action.payload.id ? action.payload : portfolio
+        )
+      };
+
     default:
       return state;
   }

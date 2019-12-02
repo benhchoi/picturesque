@@ -2,22 +2,20 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import CompleteButton from "../common/CompleteButton";
 import ContactButton from "../common/ContactButton";
 import DeleteButton from "../common/DeleteButton";
 import EditButton from "../common/EditButton";
 import FavoriteButton from "../common/FavoriteButton";
-import { editBounty, deleteBounty } from "../../actions/bounties";
+import { deletePortfolio } from "../../actions/portfolios";
 import { updateFavorites } from "../../actions/favorites";
 import { timeSince } from "../../actions/utility";
 
-export class BountyHeader extends Component {
+export class PortfolioHeader extends Component {
   static propTypes = {
-    bounty: PropTypes.object.isRequired,
+    portfolio: PropTypes.object.isRequired,
     linkTitle: PropTypes.bool.isRequired,
     auth: PropTypes.object.isRequired,
-    editBounty: PropTypes.func.isRequired,
-    deleteBounty: PropTypes.func.isRequired,
+    deletePortfolio: PropTypes.func.isRequired,
     updateFavorites: PropTypes.func.isRequired,
     favorites: PropTypes.array.isRequired
   };
@@ -26,18 +24,10 @@ export class BountyHeader extends Component {
     redirect: false
   };
 
-  onComplete = e => {
-    e.preventDefault();
-    const id = this.props.bounty.id;
-    const completed = !this.props.bounty.completed;
-    const bounty = { id, completed };
-    this.props.editBounty(bounty);
-  };
-
   onDelete = e => {
     e.preventDefault();
-    const { id } = this.props.bounty;
-    this.props.deleteBounty(id);
+    const { id } = this.props.portfolio;
+    this.props.deletePortfolio(id);
   };
 
   onFavorite = e => {
@@ -51,11 +41,11 @@ export class BountyHeader extends Component {
     }
 
     const id = this.props.auth.user.id;
-    const bountyId = this.props.bounty.id;
-    const bounties = this.props.favorites.includes(bountyId)
-      ? this.props.favorites.filter(favorite => bountyId !== favorite)
-      : [...this.props.favorites, bountyId];
-    const favorites = { id, bounties };
+    const portfolioId = this.props.portfolio.id;
+    const portfolios = this.props.favorites.includes(portfolioId)
+      ? this.props.favorites.filter(favorite => portfolioId !== favorite)
+      : [...this.props.favorites, portfolioId];
+    const favorites = { id, portfolios };
     this.props.updateFavorites(favorites);
   };
 
@@ -65,30 +55,25 @@ export class BountyHeader extends Component {
     }
 
     const { isAuthenticated, user } = this.props.auth;
-    const bounty = this.props.bounty;
+    const portfolio = this.props.portfolio;
 
     const buttons =
-      isAuthenticated && user.id === bounty.user.id ? (
+      isAuthenticated && user.id === portfolio.user.id ? (
         <div className="col-auto">
           <div className="btn-group" role="group">
-            <CompleteButton
-              completed={bounty.completed}
-              id={`${bounty.id}`}
-              onClick={this.onComplete}
-            />
-            <EditButton url={`/bounties/edit/${bounty.id}`} />
-            <DeleteButton id={`${bounty.id}`} onClick={this.onDelete} />
+            <EditButton url={`/portfolios/edit/${portfolio.id}`} />
+            <DeleteButton id={`${portfolio.id}`} onClick={this.onDelete} />
           </div>
         </div>
       ) : (
         <div className="col-auto">
           <div className="btn-group" role="group">
             <FavoriteButton
-              favorited={this.props.favorites.includes(bounty.id)}
-              id={`${bounty.id}`}
+              favorited={this.props.favorites.includes(portfolio.id)}
+              id={`${portfolio.id}`}
               onClick={this.onFavorite}
             />
-            <ContactButton email={bounty.user.email} />
+            <ContactButton email={portfolio.user.email} />
           </div>
         </div>
       );
@@ -99,9 +84,11 @@ export class BountyHeader extends Component {
           <div className="col-auto mr-auto">
             <h4>
               {this.props.linkTitle ? (
-                <Link to={`/bounties/view/${bounty.id}`}>{bounty.title}</Link>
+                <Link to={`/portfolios/view/${portfolio.id}`}>
+                  {portfolio.title}
+                </Link>
               ) : (
-                bounty.title
+                portfolio.title
               )}
             </h4>
           </div>
@@ -111,23 +98,23 @@ export class BountyHeader extends Component {
           <div className="col">
             <p className="d-inline">
               posted by{" "}
-              <Link to={`/u/${bounty.user.username}`}>
-                {bounty.user.username}
+              <Link to={`/u/${portfolio.user.username}`}>
+                {portfolio.user.username}
               </Link>{" "}
               |{" "}
               {this.props.linkTitle ? (
-                <Link to={`/bounties/view/${bounty.id}`}>
-                  {timeSince(new Date(bounty.timestamp))}
+                <Link to={`/portfolios/view/${portfolio.id}`}>
+                  {timeSince(new Date(portfolio.timestamp))}
                 </Link>
               ) : (
-                timeSince(new Date(bounty.timestamp))
+                timeSince(new Date(portfolio.timestamp))
               )}{" "}
               |{" "}
             </p>
-            <p className="d-inline text-success">${bounty.price}</p>
-            {bounty.tags.length == 0
+            <p className="d-inline text-success">${portfolio.rate}</p>
+            {portfolio.tags.length == 0
               ? ""
-              : bounty.tags.map(tag => {
+              : portfolio.tags.map(tag => {
                   return (
                     <div key={tag} className="d-inline">
                       <p className="d-inline"> | </p>
@@ -144,9 +131,9 @@ export class BountyHeader extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  favorites: state.favorites.bounties.map(bounty => bounty.id)
+  favorites: state.favorites.portfolios.map(portfolio => portfolio.id)
 });
 
-const mapDispatchToProps = { editBounty, deleteBounty, updateFavorites };
+const mapDispatchToProps = { deletePortfolio, updateFavorites };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BountyHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioHeader);
