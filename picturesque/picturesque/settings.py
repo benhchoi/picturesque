@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'taggit',
     'taggit_serializer',
     'annoying',
+    'django-filters',
 
     # custom apps
     'frontend',
