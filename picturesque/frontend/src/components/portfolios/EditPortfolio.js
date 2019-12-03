@@ -16,6 +16,7 @@ export class EditPortfolio extends Component {
   static propTypes = {
     portfolio: PropTypes.object,
     artworks: PropTypes.array.isRequired,
+    artwork: PropTypes.object,
     getArtworks: PropTypes.func.isRequired,
     editPortfolio: PropTypes.func.isRequired,
     getPortfolio: PropTypes.func.isRequired
@@ -38,7 +39,7 @@ export class EditPortfolio extends Component {
     this.props.getPortfolio(this.props.match.params.id);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (
       !this.state.initialized &&
       this.props.portfolio != null &&
@@ -53,6 +54,19 @@ export class EditPortfolio extends Component {
         rate: rate,
         selected: new Set(artworks.map(artwork => artwork.id)),
         initialized: true
+      });
+    }
+
+    if (
+      this.props.artwork != null &&
+      prevProps.artwork !== this.props.artwork
+    ) {
+      this.setState(state => {
+        state.selected.add(this.props.artwork.id);
+
+        return {
+          selected: state.selected
+        };
       });
     }
   }
@@ -187,6 +201,7 @@ export class EditPortfolio extends Component {
 
 const mapStateToProps = state => ({
   artworks: state.portfolios.artworks,
+  artwork: state.portfolios.artwork,
   portfolio: state.portfolios.portfolio
 });
 

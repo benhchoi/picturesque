@@ -3,7 +3,8 @@ import { returnErrors, createMessage } from "./messages";
 import {
   GET_FAVORITES,
   UPDATE_FAVORITES,
-  GET_USERNAME_FAVORITES
+  GET_USERNAME_FAVORITES,
+  CLEAR_USER_FAVORITES
 } from "./types";
 import { tokenConfig } from "./auth";
 
@@ -57,4 +58,11 @@ export const getUsernameFavorites = username => dispatch => {
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
+};
+
+// clear any favorites state items that are auth specific for logout
+export const clearUserFavorites = () => {
+  return {
+    type: CLEAR_USER_FAVORITES
+  };
 };

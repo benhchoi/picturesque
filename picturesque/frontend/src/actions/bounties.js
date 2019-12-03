@@ -10,7 +10,8 @@ import {
   GET_BOUNTY,
   EDIT_BOUNTY,
   GET_MY_BOUNTIES,
-  SEARCH_BOUNTIES
+  SEARCH_BOUNTIES,
+  CLEAR_USER_BOUNTIES
 } from "./types";
 import { tokenConfig } from "./auth";
 
@@ -179,4 +180,11 @@ export const searchBounties = (search, tags) => dispatch => {
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
+};
+
+// clear any bounties state items that are auth specific for logout
+export const clearUserBounties = () => {
+  return {
+    type: CLEAR_USER_BOUNTIES
+  };
 };

@@ -80,7 +80,7 @@ export class Favorites extends Component {
             >
               <h3 className="text-info">Portfolios</h3>
             </div>
-            <div className="collapse show" id="portfolios">
+            <div className="collapse" id="portfolios">
               <div className="card-body">
                 {this.props.favorites.portfolios.length == 0 ? (
                   <div className="row align-items-center">

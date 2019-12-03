@@ -1,7 +1,8 @@
 import {
   GET_FAVORITES,
   UPDATE_FAVORITES,
-  GET_USERNAME_FAVORITES
+  GET_USERNAME_FAVORITES,
+  CLEAR_USER_FAVORITES
 } from "../actions/types";
 
 const initialState = {
@@ -23,6 +24,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         accountFavorites: action.payload
+      };
+    case CLEAR_USER_FAVORITES:
+      return {
+        ...state,
+        bounties: [],
+        portfolios: []
       };
     default:
       return state;

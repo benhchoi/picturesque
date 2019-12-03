@@ -12,6 +12,7 @@ export class CreateBounty extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     refArts: PropTypes.array.isRequired,
+    refArt: PropTypes.object,
     getRefArts: PropTypes.func.isRequired,
     addBounty: PropTypes.func.isRequired,
     Bounty: PropTypes.object
@@ -35,6 +36,15 @@ export class CreateBounty extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.bounty !== this.props.bounty) {
       this.setState({ created: true });
+    }
+    if (this.props.refArt != null && prevProps.refArt !== this.props.refArt) {
+      this.setState(state => {
+        state.selected.add(this.props.refArt.id);
+
+        return {
+          selected: state.selected
+        };
+      });
     }
   }
 
@@ -168,6 +178,7 @@ export class CreateBounty extends Component {
 const mapStateToProps = state => ({
   user: state.auth.user,
   refArts: state.bounties.refArts,
+  refArt: state.bounties.refArt,
   bounty: state.bounties.bounty
 });
 

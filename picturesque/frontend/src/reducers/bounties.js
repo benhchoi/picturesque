@@ -8,7 +8,8 @@ import {
   GET_BOUNTY,
   EDIT_BOUNTY,
   GET_MY_BOUNTIES,
-  SEARCH_BOUNTIES
+  SEARCH_BOUNTIES,
+  CLEAR_USER_BOUNTIES
 } from "../actions/types";
 
 const initialState = {
@@ -36,7 +37,8 @@ export default function(state = initialState, action) {
     case UPLOAD_REFART:
       return {
         ...state,
-        refArts: [action.payload, ...state.refArts]
+        refArts: [action.payload, ...state.refArts],
+        refArt: action.payload
       };
     case GET_REFARTS:
       return {
@@ -61,6 +63,12 @@ export default function(state = initialState, action) {
         bounties: state.bounties.map(bounty =>
           bounty.id === action.payload.id ? action.payload : bounty
         )
+      };
+    case CLEAR_USER_BOUNTIES:
+      return {
+        ...state,
+        refArts: [],
+        refArt: null
       };
     default:
       return state;

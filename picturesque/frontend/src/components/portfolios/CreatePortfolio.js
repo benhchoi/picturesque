@@ -12,6 +12,7 @@ export class CreatePortfolio extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     artworks: PropTypes.array.isRequired,
+    artwork: PropTypes.object,
     getArtworks: PropTypes.func.isRequired,
     addPortfolio: PropTypes.func.isRequired,
     portfolio: PropTypes.object
@@ -34,6 +35,18 @@ export class CreatePortfolio extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.portfolio !== this.props.portfolio) {
       this.setState({ created: true });
+    }
+    if (
+      this.props.artwork != null &&
+      prevProps.artwork !== this.props.artwork
+    ) {
+      this.setState(state => {
+        state.selected.add(this.props.artwork.id);
+
+        return {
+          selected: state.selected
+        };
+      });
     }
   }
 
@@ -165,6 +178,7 @@ export class CreatePortfolio extends Component {
 const mapStateToProps = state => ({
   user: state.auth.user,
   artworks: state.portfolios.artworks,
+  artwork: state.portfolios.artwork,
   portfolio: state.portfolios.portfolio
 });
 

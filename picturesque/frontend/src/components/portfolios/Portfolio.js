@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getPortfolio, deletePortfolio } from "../../actions/portfolios";
 import { updateFavorites } from "../../actions/favorites";
-import { timeSince } from "../../actions/utility";
-import { Link, Redirect } from "react-router-dom";
 import ViewImageModal from "../common/ViewImageModal";
 import Breadcrumbs from "../layout/Breadcrumbs";
 import PortfolioHeader from "./PortfolioHeader";
@@ -79,9 +77,11 @@ export class Portfolio extends Component {
                     This item is not for sale
                   </p>
                 ) : (
-                  <p className="text-success text-center">
-                    Buy this piece for ${art.price}
-                  </p>
+                  <a href={`mailto:${this.props.portfolio.user.email}`}>
+                    <p className="text-success text-center">
+                      Buy this piece for ${art.price}
+                    </p>
+                  </a>
                 )}
               </div>
             </div>
@@ -93,7 +93,6 @@ export class Portfolio extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
   portfolio: state.portfolios.portfolio,
   favorites: state.favorites.portfolios.map(portfolio => portfolio.id)
 });

@@ -35,6 +35,8 @@ export class Alerts extends Component {
     if (message !== prevProps.message) {
       if (message.passwordNotMatch) alert.error(message.passwordNotMatch);
       if (message.userDNE) alert.error(message.userDNE);
+      if (message.privateRouteFail) alert.error(message.privateRouteFail);
+      if (message.favoriteFail) alert.error(message.favoriteFail);
       if (message.login) alert.success(message.login);
       if (message.register) alert.success(message.register);
       if (message.logout) alert.success(message.logout);

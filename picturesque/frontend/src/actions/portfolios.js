@@ -10,7 +10,8 @@ import {
   GET_PORTFOLIO,
   GET_MY_PORTFOLIOS,
   EDIT_PORTFOLIO,
-  SEARCH_PORTFOLIOS
+  SEARCH_PORTFOLIOS,
+  CLEAR_USER_PORTFOLIOS
 } from "./types";
 import { tokenConfig } from "./auth";
 
@@ -178,4 +179,11 @@ export const searchPortfolios = search => dispatch => {
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
+};
+
+// clear any portfolios state items that are auth specific for logout
+export const clearUserPortfolios = () => {
+  return {
+    type: CLEAR_USER_PORTFOLIOS
+  };
 };

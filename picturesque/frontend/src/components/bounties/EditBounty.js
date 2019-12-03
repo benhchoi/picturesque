@@ -12,6 +12,7 @@ export class EditBounty extends Component {
   static propTypes = {
     bounty: PropTypes.object,
     refArts: PropTypes.array.isRequired,
+    refArt: PropTypes.object,
     getRefArts: PropTypes.func.isRequired,
     editBounty: PropTypes.func.isRequired,
     getBounty: PropTypes.func.isRequired
@@ -34,7 +35,7 @@ export class EditBounty extends Component {
     this.props.getBounty(id);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (
       !this.state.initialized &&
       this.props.bounty != null &&
@@ -55,6 +56,16 @@ export class EditBounty extends Component {
         price: price,
         selected: new Set(reference_arts.map(refArt => refArt.id)),
         initialized: true
+      });
+    }
+
+    if (this.props.refArt != null && prevProps.refArt !== this.props.refArt) {
+      this.setState(state => {
+        state.selected.add(this.props.refArt.id);
+
+        return {
+          selected: state.selected
+        };
       });
     }
   }
@@ -193,6 +204,7 @@ export class EditBounty extends Component {
 
 const mapStateToProps = state => ({
   refArts: state.bounties.refArts,
+  refArt: state.bounties.refArt,
   bounty: state.bounties.bounty
 });
 

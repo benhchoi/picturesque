@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getMyBounties } from "../../actions/bounties";
 import { checkUsername } from "../../actions/auth";
-import { Link } from "react-router-dom";
 import Breadcrumbs from "../layout/Breadcrumbs";
 import MyBountyHeader from "./MyBountyHeader";
 
@@ -99,7 +98,7 @@ export class MyBounties extends Component {
             >
               <h3 className="text-success">Completed</h3>
             </div>
-            <div className="collapse show" id="completed">
+            <div className="collapse" id="completed">
               <div className="card-body">
                 {this.state.completed.length == 0 ? (
                   <div className="row align-items-center">

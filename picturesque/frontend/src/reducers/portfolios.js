@@ -8,7 +8,8 @@ import {
   GET_PORTFOLIO,
   GET_MY_PORTFOLIOS,
   EDIT_PORTFOLIO,
-  SEARCH_PORTFOLIOS
+  SEARCH_PORTFOLIOS,
+  CLEAR_USER_PORTFOLIOS
 } from "../actions/types";
 
 const initialState = {
@@ -38,7 +39,8 @@ export default function(state = initialState, action) {
     case UPLOAD_ARTWORK:
       return {
         ...state,
-        artworks: [action.payload, ...state.artworks]
+        artworks: [action.payload, ...state.artworks],
+        artwork: action.payload
       };
     case GET_ARTWORKS:
       return {
@@ -65,7 +67,12 @@ export default function(state = initialState, action) {
           portfolio.id === action.payload.id ? action.payload : portfolio
         )
       };
-
+    case CLEAR_USER_PORTFOLIOS:
+      return {
+        ...state,
+        artworks: [],
+        artwork: null
+      };
     default:
       return state;
   }

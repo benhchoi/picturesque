@@ -10,6 +10,7 @@ import FavoriteButton from "../common/FavoriteButton";
 import { editBounty, deleteBounty } from "../../actions/bounties";
 import { updateFavorites } from "../../actions/favorites";
 import { timeSince } from "../../actions/utility";
+import { createMessage } from "../../actions/messages";
 
 export class BountyHeader extends Component {
   static propTypes = {
@@ -19,7 +20,8 @@ export class BountyHeader extends Component {
     editBounty: PropTypes.func.isRequired,
     deleteBounty: PropTypes.func.isRequired,
     updateFavorites: PropTypes.func.isRequired,
-    favorites: PropTypes.array.isRequired
+    favorites: PropTypes.array.isRequired,
+    createMessage: PropTypes.func.isRequired
   };
 
   state = {
@@ -44,6 +46,9 @@ export class BountyHeader extends Component {
     e.preventDefault();
 
     if (!this.props.auth.isAuthenticated) {
+      this.props.createMessage({
+        favoriteFail: "You must be logged in to favorite a bounty"
+      });
       this.setState({
         redirect: true
       });
@@ -151,6 +156,11 @@ const mapStateToProps = state => ({
   favorites: state.favorites.bounties.map(bounty => bounty.id)
 });
 
-const mapDispatchToProps = { editBounty, deleteBounty, updateFavorites };
+const mapDispatchToProps = {
+  editBounty,
+  deleteBounty,
+  updateFavorites,
+  createMessage
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(BountyHeader);

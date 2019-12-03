@@ -13,7 +13,9 @@ import {
   CHECK_USERNAME_FAIL,
   CHECK_USERNAME
 } from "./types";
-import { getFavorites } from "./favorites";
+import { getFavorites, clearUserFavorites } from "./favorites";
+import { clearUserBounties } from "./bounties";
+import { clearUserPortfolios } from "./portfolios";
 
 // check token & load user
 export const loadUser = () => (dispatch, getState) => {
@@ -112,6 +114,9 @@ export const logout = () => (dispatch, getState) => {
         type: LOGOUT_SUCCESS
       });
       dispatch(createMessage({ logout: "Logout successful" }));
+      dispatch(clearUserBounties());
+      dispatch(clearUserPortfolios());
+      dispatch(clearUserFavorites());
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

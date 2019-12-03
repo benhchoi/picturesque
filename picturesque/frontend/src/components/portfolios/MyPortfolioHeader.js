@@ -9,6 +9,7 @@ import ContactButton from "../common/ContactButton";
 import DeleteButton from "../common/DeleteButton";
 import EditButton from "../common/EditButton";
 import FavoriteButton from "../common/FavoriteButton";
+import { createMessage } from "../../actions/messages";
 
 export class MyPortfolioHeader extends Component {
   static propTypes = {
@@ -16,7 +17,8 @@ export class MyPortfolioHeader extends Component {
     auth: PropTypes.object.isRequired,
     favorites: PropTypes.array.isRequired,
     deletePortfolio: PropTypes.func.isRequired,
-    updateFavorites: PropTypes.func.isRequired
+    updateFavorites: PropTypes.func.isRequired,
+    createMessage: PropTypes.func.isRequired
   };
 
   state = {
@@ -36,6 +38,9 @@ export class MyPortfolioHeader extends Component {
     e.preventDefault();
 
     if (!this.props.auth.isAuthenticated) {
+      this.props.createMessage({
+        favoriteFail: "You must be logged in to favorite a portfolio"
+      });
       this.setState({
         redirect: true
       });
@@ -135,6 +140,6 @@ const mapStateToProps = state => ({
   favorites: state.favorites.portfolios.map(portfolio => portfolio.id)
 });
 
-const mapDispatchToProps = { deletePortfolio, updateFavorites };
+const mapDispatchToProps = { deletePortfolio, updateFavorites, createMessage };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPortfolioHeader);
