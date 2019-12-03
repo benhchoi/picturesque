@@ -1,10 +1,14 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { createMessage } from "../../actions/messages";
 
-const PrivateRoute = ({ component: Component, auth, ...rest }) => {
+const PrivateRoute = ({
+  component: Component,
+  auth,
+  createMessage,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}
@@ -12,7 +16,7 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
         if (auth.isLoading) {
           return <p>Loading...</p>;
         } else if (!auth.isAuthenticated) {
-          this.props.createMessage({
+          createMessage({
             privateRouteFail: "You must be logged in to access this page"
           });
           return <Redirect to="/login" />;
