@@ -124,14 +124,18 @@ export class BountyHeader extends Component {
               )}{" "}
               |{" "}
             </p>
-            <p className="d-inline text-success">${bounty.price}</p>
+            <a href={`mailto:${bounty.user.email}`}>
+              <p className="d-inline text-success">${bounty.price}</p>
+            </a>
             {bounty.tags.length == 0
               ? ""
               : bounty.tags.map(tag => {
                   return (
                     <div key={tag} className="d-inline">
                       <p className="d-inline"> | </p>
-                      <p className="d-inline text-info">#{tag}</p>
+                      <Link to={`/bounties?search=${tag}`}>
+                        <p className="d-inline text-info">#{tag}</p>
+                      </Link>
                     </div>
                   );
                 })}

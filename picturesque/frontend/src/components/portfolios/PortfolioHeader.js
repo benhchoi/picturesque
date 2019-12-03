@@ -111,14 +111,18 @@ export class PortfolioHeader extends Component {
               )}{" "}
               |{" "}
             </p>
-            <p className="d-inline text-success">${portfolio.rate}</p>
+            <a href={`mailto:${portfolio.user.email}`}>
+              <p className="d-inline text-success">${portfolio.rate}</p>
+            </a>
             {portfolio.tags.length == 0
               ? ""
               : portfolio.tags.map(tag => {
                   return (
                     <div key={tag} className="d-inline">
                       <p className="d-inline"> | </p>
-                      <p className="d-inline text-info">#{tag}</p>
+                      <Link to={`/portfolios?search=${tag}`}>
+                        <p className="d-inline text-info">#{tag}</p>
+                      </Link>
                     </div>
                   );
                 })}

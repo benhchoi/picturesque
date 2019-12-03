@@ -156,10 +156,11 @@ export const getMyBounties = username => dispatch => {
 };
 
 // search bounties
-export const searchBounties = search => dispatch => {
+export const searchBounties = (search, tags) => dispatch => {
   const config = {
     params: {
-      search
+      search,
+      tags
     }
   };
 
