@@ -1,5 +1,5 @@
 import axios from "axios";
-import { returnErrors } from "./messages";
+import { returnErrors, createMessage } from "./messages";
 import {
   GET_BOUNTIES,
   DELETE_BOUNTY,
@@ -23,6 +23,7 @@ export const uploadRefArt = refArt => (dispatch, getState) => {
         type: UPLOAD_REFART,
         payload: res.data
       });
+      dispatch(createMessage({ uploadRefArt: "Reference art uploaded" }));
     })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -83,6 +84,7 @@ export const deleteBounty = id => (dispatch, getState) => {
         type: DELETE_BOUNTY,
         payload: id
       });
+      dispatch(createMessage({ deleteBounty: "Bounty deleted" }));
     })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -98,6 +100,7 @@ export const addBounty = bounty => (dispatch, getState) => {
         type: ADD_BOUNTY,
         payload: res.data
       });
+      dispatch(createMessage({ addBounty: "Bounty created" }));
     })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -128,6 +131,7 @@ export const editBounty = bounty => (dispatch, getState) => {
         type: EDIT_BOUNTY,
         payload: res.data
       });
+      dispatch(createMessage({ editBounty: "Bounty edited" }));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

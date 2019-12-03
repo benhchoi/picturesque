@@ -1,5 +1,5 @@
 import axios from "axios";
-import { returnErrors } from "./messages";
+import { returnErrors, createMessage } from "./messages";
 import {
   USER_LOADED,
   USER_LOADING,
@@ -59,6 +59,7 @@ export const login = (username, password) => dispatch => {
         payload: res.data
       });
       dispatch(getFavorites(res.data.user.id));
+      dispatch(createMessage({ login: "Login successful" }));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
@@ -92,6 +93,7 @@ export const register = ({ username, email, password }) => dispatch => {
         payload: res.data
       });
       dispatch(getFavorites(res.data.user.id));
+      dispatch(createMessage({ register: "Register successful!" }));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
@@ -109,6 +111,7 @@ export const logout = () => (dispatch, getState) => {
       dispatch({
         type: LOGOUT_SUCCESS
       });
+      dispatch(createMessage({ logout: "Logout successful" }));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
@@ -132,7 +135,9 @@ export const checkUsername = username => dispatch => {
     .get("/api/account", config)
     .then(res => dispatch({ type: CHECK_USERNAME_SUCCESS }))
     .catch(err => {
-      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(
+        createMessage({ userDNE: `The user ${username} does not exist` })
+      );
       dispatch({ type: CHECK_USERNAME_FAIL });
     });
 };

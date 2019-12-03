@@ -1,5 +1,5 @@
 import axios from "axios";
-import { returnErrors } from "./messages";
+import { returnErrors, createMessage } from "./messages";
 import {
   GET_FAVORITES,
   UPDATE_FAVORITES,
@@ -31,6 +31,7 @@ export const updateFavorites = favorites => (dispatch, getState) => {
         type: UPDATE_FAVORITES,
         payload: res.data
       });
+      dispatch(createMessage({ updateFavorites: "Favorites updated" }));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

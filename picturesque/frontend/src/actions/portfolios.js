@@ -1,5 +1,5 @@
 import axios from "axios";
-import { returnErrors } from "./messages";
+import { returnErrors, createMessage } from "./messages";
 import {
   GET_PORTFOLIOS,
   DELETE_PORTFOLIO,
@@ -23,6 +23,7 @@ export const uploadArtwork = artwork => (dispatch, getState) => {
         type: UPLOAD_ARTWORK,
         payload: res.data
       });
+      dispatch(createMessage({ uploadArtwork: "Artwork uploaded" }));
     })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -83,6 +84,7 @@ export const deletePortfolio = id => (dispatch, getState) => {
         type: DELETE_PORTFOLIO,
         payload: id
       });
+      dispatch(createMessage({ deletePortfolio: "Portfolio deleted" }));
     })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -98,6 +100,7 @@ export const addPortfolio = portfolio => (dispatch, getState) => {
         type: ADD_PORTFOLIO,
         payload: res.data
       });
+      dispatch(createMessage({ addPortfolio: "Portfolio created" }));
     })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
@@ -149,6 +152,7 @@ export const editPortfolio = portfolio => (dispatch, getState) => {
         type: EDIT_PORTFOLIO,
         payload: res.data
       });
+      dispatch(createMessage({ editPortfolio: "Portfolio edited" }));
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
