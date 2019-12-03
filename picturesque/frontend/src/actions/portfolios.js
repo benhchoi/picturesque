@@ -9,7 +9,8 @@ import {
   GET_ARTWORKS,
   GET_PORTFOLIO,
   GET_MY_PORTFOLIOS,
-  EDIT_PORTFOLIO
+  EDIT_PORTFOLIO,
+  SEARCH_PORTFOLIOS
 } from "./types";
 import { tokenConfig } from "./auth";
 
@@ -152,4 +153,25 @@ export const editPortfolio = portfolio => (dispatch, getState) => {
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
     });
+};
+
+// search portfolios
+export const searchPortfolios = search => dispatch => {
+  const config = {
+    params: {
+      search
+    }
+  };
+
+  axios
+    .get("/api/portfolios/", config)
+    .then(res =>
+      dispatch({
+        type: SEARCH_PORTFOLIOS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };

@@ -77,8 +77,8 @@ export class MyBounties extends Component {
                     <div
                       className={
                         i == 0
-                          ? "row align-items-center p-2"
-                          : "row align-items-center p-2 border-top"
+                          ? "row align-items-center py-2"
+                          : "row align-items-center py-2 border-top"
                       }
                       key={bounty.id}
                     >

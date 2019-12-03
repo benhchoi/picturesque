@@ -7,7 +7,8 @@ import {
   GET_ARTWORKS,
   GET_PORTFOLIO,
   GET_MY_PORTFOLIOS,
-  EDIT_PORTFOLIO
+  EDIT_PORTFOLIO,
+  SEARCH_PORTFOLIOS
 } from "../actions/types";
 
 const initialState = {
@@ -21,6 +22,7 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_PORTFOLIOS:
     case GET_MY_PORTFOLIOS:
+    case SEARCH_PORTFOLIOS:
       return {
         ...state,
         portfolios: action.payload

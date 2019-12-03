@@ -52,9 +52,16 @@ export class Portfolio extends Component {
             <p className="text-secondary">{this.props.portfolio.description}</p>
           </div>
         </div>
-        {this.props.portfolio.artworks.map(art => {
+        {this.props.portfolio.artworks.map((art, i) => {
           return (
-            <div key={art.id} className="row p-2 align-items-center border-top">
+            <div
+              key={art.id}
+              className={
+                i === 0
+                  ? "row py-2 align-items-center"
+                  : "row py-2 align-items-center border-top"
+              }
+            >
               <div className="col-5">
                 <img
                   src={art.image}

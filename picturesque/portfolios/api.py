@@ -1,5 +1,5 @@
 from .models import Portfolio, Artwork
-from rest_framework import viewsets, permissions, mixins
+from rest_framework import viewsets, permissions, mixins, filters
 from .serializers import PortfolioSerializer, ArtworkSerializer
 from django.contrib.auth.models import User
 
@@ -21,6 +21,14 @@ class PortfolioViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticatedOrReadOnly
     ]
     serializer_class = PortfolioSerializer
+    filter_backends = [
+        filters.SearchFilter
+    ]
+    search_fields = [
+        'user__username',
+        'title',
+        'tags__name'
+    ]
 
     def get_queryset(self):
         queryset = Portfolio.objects.all().order_by('-timestamp')

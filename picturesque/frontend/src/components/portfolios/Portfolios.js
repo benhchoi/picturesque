@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getPortfolios } from "../../actions/portfolios";
+import { getPortfolios, searchPortfolios } from "../../actions/portfolios";
 import ScrollingImages from "../common/ScrollingImages";
 import ViewImageModal from "../common/ViewImageModal";
 import Breadcrumbs from "../layout/Breadcrumbs";
 import PortfolioHeader from "./PortfolioHeader";
+import SearchBar from "../common/SearchBar";
 
 export class Portfolios extends Component {
   static propTypes = {
     portfolios: PropTypes.array.isRequired,
-    getPortfolios: PropTypes.func.isRequired
+    getPortfolios: PropTypes.func.isRequired,
+    searchPortfolios: PropTypes.func.isRequired
   };
 
   state = {
@@ -34,12 +36,19 @@ export class Portfolios extends Component {
   render() {
     return (
       <div className="container">
-        <Breadcrumbs path={this.props.location.pathname} />
         <ViewImageModal
           id={this.state.viewModal}
           image={this.state.imageSrc}
           description={this.state.imageDesc}
         />
+        <div className="row">
+          <div className="col-auto mr-auto">
+            <Breadcrumbs path={this.props.location.pathname} />
+          </div>
+          <div className="col-auto">
+            <SearchBar searchFunc={this.props.searchPortfolios} />
+          </div>
+        </div>
         <div className="row">
           <div className="col">
             <h2 className="text-center">Portfolios</h2>
@@ -47,7 +56,7 @@ export class Portfolios extends Component {
         </div>
         {this.props.portfolios.map((portfolio, i) => (
           <div
-            className={i === 0 ? "row p-2" : "row p-2 border-top"}
+            className={i === 0 ? "row py-2" : "row py-2 border-top"}
             key={portfolio.id}
           >
             <div className="col">
@@ -70,6 +79,6 @@ const mapStateToProps = state => ({
   portfolios: state.portfolios.portfolios
 });
 
-const mapDispatchToProps = { getPortfolios };
+const mapDispatchToProps = { getPortfolios, searchPortfolios };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Portfolios);

@@ -9,7 +9,8 @@ import {
   GET_REFARTS,
   GET_BOUNTY,
   EDIT_BOUNTY,
-  GET_MY_BOUNTIES
+  GET_MY_BOUNTIES,
+  SEARCH_BOUNTIES
 } from "./types";
 import { tokenConfig } from "./auth";
 
@@ -149,6 +150,27 @@ export const getMyBounties = username => dispatch => {
         payload: res.data
       });
     })
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+// search bounties
+export const searchBounties = search => dispatch => {
+  const config = {
+    params: {
+      search
+    }
+  };
+
+  axios
+    .get("/api/bounties/", config)
+    .then(res =>
+      dispatch({
+        type: SEARCH_BOUNTIES,
+        payload: res.data
+      })
+    )
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );

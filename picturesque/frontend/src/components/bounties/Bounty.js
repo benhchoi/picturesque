@@ -49,11 +49,15 @@ export class Bounty extends Component {
             <p className="text-secondary">{this.props.bounty.description}</p>
           </div>
         </div>
-        {this.props.bounty.reference_arts.map(refArt => {
+        {this.props.bounty.reference_arts.map((refArt, i) => {
           return (
             <div
               key={refArt.id}
-              className="row p-2 align-items-center border-top"
+              className={
+                i === 0
+                  ? "row py-2 align-items-center"
+                  : "row py-2 align-items-center border-top"
+              }
             >
               <div className="col-5">
                 <img

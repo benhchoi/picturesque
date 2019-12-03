@@ -7,7 +7,8 @@ import {
   GET_REFARTS,
   GET_BOUNTY,
   EDIT_BOUNTY,
-  GET_MY_BOUNTIES
+  GET_MY_BOUNTIES,
+  SEARCH_BOUNTIES
 } from "../actions/types";
 
 const initialState = {
@@ -21,6 +22,7 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_BOUNTIES:
     case GET_MY_BOUNTIES:
+    case SEARCH_BOUNTIES:
       return {
         ...state,
         bounties: action.payload

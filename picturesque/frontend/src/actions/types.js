@@ -8,6 +8,7 @@ export const GET_REFART = "GET_REFART";
 export const UPLOAD_REFART = "UPLOAD_REFART";
 export const EDIT_BOUNTY = "EDIT_BOUNTY";
 export const GET_MY_BOUNTIES = "GET_MY_BOUNTIES";
+export const SEARCH_BOUNTIES = "SEARCH_BOUNTIES";
 
 // portfolio related stuff
 export const GET_PORTFOLIOS = "GET_PORTFOLIOS";
@@ -19,6 +20,7 @@ export const GET_ARTWORK = "GET_ARTWORK";
 export const GET_ARTWORKS = "GET_ARTWORKS";
 export const EDIT_PORTFOLIO = "EDIT_PORTFOLIO";
 export const GET_MY_PORTFOLIOS = "GET_MY_PORTFOLIOS";
+export const SEARCH_PORTFOLIOS = "SEARCH_PORTFOLIOS";
 
 // auth related stuff
 export const USER_LOADING = "USER_LOADING";

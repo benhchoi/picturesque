@@ -1,5 +1,5 @@
 from .models import Bounty, ReferenceArt
-from rest_framework import viewsets, permissions, mixins
+from rest_framework import viewsets, permissions, mixins, filters
 from rest_framework.response import Response
 from .serializers import BountySerializer, ReferenceArtSerializer
 from django.contrib.auth.models import User
@@ -22,6 +22,14 @@ class BountyViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticatedOrReadOnly
     ]
     serializer_class = BountySerializer
+    filter_backends = [
+        filters.SearchFilter
+    ]
+    search_fields = [
+        'user__username',
+        'title',
+        'tags__name'
+    ]
 
     def get_queryset(self):
         queryset = Bounty.objects.all().order_by('-timestamp')

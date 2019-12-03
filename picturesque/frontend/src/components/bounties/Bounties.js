@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getBounties } from "../../actions/bounties";
+import { getBounties, searchBounties } from "../../actions/bounties";
 import ScrollingImages from "../common/ScrollingImages";
 import ViewImageModal from "../common/ViewImageModal";
 import Breadcrumbs from "../layout/Breadcrumbs";
 import BountyHeader from "./BountyHeader";
+import SearchBar from "../common/SearchBar";
 
 export class Bounties extends Component {
   static propTypes = {
     bounties: PropTypes.array.isRequired,
-    getBounties: PropTypes.func.isRequired
+    getBounties: PropTypes.func.isRequired,
+    searchBounties: PropTypes.func.isRequired
   };
 
   state = {
@@ -18,6 +20,10 @@ export class Bounties extends Component {
     imageSrc: "",
     imageDesc: ""
   };
+
+  componentDidMount() {
+    this.props.getBounties();
+  }
 
   selectImage = e => {
     const { src, alt } = e.target;
@@ -27,19 +33,22 @@ export class Bounties extends Component {
     });
   };
 
-  componentDidMount() {
-    this.props.getBounties();
-  }
-
   render() {
     return (
       <div className="container">
-        <Breadcrumbs path={this.props.location.pathname} />
         <ViewImageModal
           id={this.state.viewModal}
           image={this.state.imageSrc}
           description={this.state.imageDesc}
         />
+        <div className="row">
+          <div className="col-auto mr-auto">
+            <Breadcrumbs path={this.props.location.pathname} />
+          </div>
+          <div className="col-auto">
+            <SearchBar searchFunc={this.props.searchBounties} />
+          </div>
+        </div>
         <div className="row">
           <div className="col">
             <h2 className="text-center">Bounties</h2>
@@ -49,7 +58,7 @@ export class Bounties extends Component {
           .filter(bounty => !bounty.completed)
           .map((bounty, i) => (
             <div
-              className={i === 0 ? "row p-2" : "row p-2 border-top"}
+              className={i === 0 ? "row py-2" : "row py-2 border-top"}
               key={bounty.id}
             >
               <div className="col">
@@ -72,6 +81,6 @@ const mapStateToProps = state => ({
   bounties: state.bounties.bounties
 });
 
-const mapDispatchToProps = { getBounties };
+const mapDispatchToProps = { getBounties, searchBounties };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Bounties);
