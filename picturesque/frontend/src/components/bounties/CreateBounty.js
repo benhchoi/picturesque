@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import UploadModal from "./UploadModal";
 import ScrollingImages from "../common/ScrollingImages";
-import { getRefArts, addBounty } from "../../actions/bounties";
+import { addBounty } from "../../actions/bounties";
 import { makeTagsArray } from "../../actions/utility";
 import { Redirect } from "react-router-dom";
 import Breadcrumbs from "../layout/Breadcrumbs";
@@ -13,9 +13,8 @@ export class CreateBounty extends Component {
     user: PropTypes.object.isRequired,
     refArts: PropTypes.array.isRequired,
     refArt: PropTypes.object,
-    getRefArts: PropTypes.func.isRequired,
     addBounty: PropTypes.func.isRequired,
-    Bounty: PropTypes.object
+    bounty: PropTypes.object
   };
 
   state = {
@@ -28,10 +27,6 @@ export class CreateBounty extends Component {
     created: false,
     selected: new Set()
   };
-
-  componentDidMount() {
-    this.props.getRefArts();
-  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.bounty !== this.props.bounty) {
@@ -182,6 +177,6 @@ const mapStateToProps = state => ({
   bounty: state.bounties.bounty
 });
 
-const mapDispatchToProps = { getRefArts, addBounty };
+const mapDispatchToProps = { addBounty };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateBounty);

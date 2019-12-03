@@ -3,11 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import UploadModal from "./UploadModal";
 import ScrollingImages from "../common/ScrollingImages";
-import {
-  getArtworks,
-  editPortfolio,
-  getPortfolio
-} from "../../actions/portfolios";
+import { editPortfolio, getPortfolio } from "../../actions/portfolios";
 import { makeTagsArray, makeTagsString } from "../../actions/utility";
 import { Redirect } from "react-router-dom";
 import Breadcrumbs from "../layout/Breadcrumbs";
@@ -17,7 +13,6 @@ export class EditPortfolio extends Component {
     portfolio: PropTypes.object,
     artworks: PropTypes.array.isRequired,
     artwork: PropTypes.object,
-    getArtworks: PropTypes.func.isRequired,
     editPortfolio: PropTypes.func.isRequired,
     getPortfolio: PropTypes.func.isRequired
   };
@@ -35,7 +30,6 @@ export class EditPortfolio extends Component {
 
   componentDidMount() {
     const id = this.props.match.params.id;
-    this.props.getArtworks();
     this.props.getPortfolio(this.props.match.params.id);
   }
 
@@ -205,6 +199,6 @@ const mapStateToProps = state => ({
   portfolio: state.portfolios.portfolio
 });
 
-const mapDispatchToProps = { getArtworks, editPortfolio, getPortfolio };
+const mapDispatchToProps = { editPortfolio, getPortfolio };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditPortfolio);

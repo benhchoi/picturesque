@@ -53,11 +53,17 @@ export default function(state = initialState, action) {
         artwork: action.payload
       };
     case GET_PORTFOLIO:
-    case ADD_PORTFOLIO:
-    case EDIT_PORTFOLIO:
       return {
         ...state,
-        portfolio: action.payload
+        portfolio: action.payload,
+        artworks: action.payload.artworks
+      };
+    case ADD_PORTFOLIO:
+      return {
+        ...state,
+        portfolio: action.payload,
+        artworks: [],
+        artwork: null
       };
     case EDIT_PORTFOLIO:
       return {

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import UploadModal from "./UploadModal";
 import ScrollingImages from "../common/ScrollingImages";
-import { getArtworks, addPortfolio } from "../../actions/portfolios";
+import { addPortfolio } from "../../actions/portfolios";
 import { makeTagsArray } from "../../actions/utility";
 import { Redirect } from "react-router-dom";
 import Breadcrumbs from "../layout/Breadcrumbs";
@@ -13,7 +13,6 @@ export class CreatePortfolio extends Component {
     user: PropTypes.object.isRequired,
     artworks: PropTypes.array.isRequired,
     artwork: PropTypes.object,
-    getArtworks: PropTypes.func.isRequired,
     addPortfolio: PropTypes.func.isRequired,
     portfolio: PropTypes.object
   };
@@ -27,10 +26,6 @@ export class CreatePortfolio extends Component {
     rate: "",
     created: false
   };
-
-  componentDidMount() {
-    this.props.getArtworks();
-  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.portfolio !== this.props.portfolio) {
@@ -182,6 +177,6 @@ const mapStateToProps = state => ({
   portfolio: state.portfolios.portfolio
 });
 
-const mapDispatchToProps = { getArtworks, addPortfolio };
+const mapDispatchToProps = { addPortfolio };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePortfolio);

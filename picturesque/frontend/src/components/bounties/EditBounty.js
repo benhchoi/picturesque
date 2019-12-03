@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import UploadModal from "./UploadModal";
 import ScrollingImages from "../common/ScrollingImages";
-import { getRefArts, editBounty, getBounty } from "../../actions/bounties";
+import { editBounty, getBounty } from "../../actions/bounties";
 import { makeTagsArray, makeTagsString } from "../../actions/utility";
 import { Redirect } from "react-router-dom";
 import Breadcrumbs from "../layout/Breadcrumbs";
@@ -31,7 +31,6 @@ export class EditBounty extends Component {
 
   componentDidMount() {
     const id = this.props.match.params.id;
-    this.props.getRefArts();
     this.props.getBounty(id);
   }
 
@@ -208,6 +207,6 @@ const mapStateToProps = state => ({
   bounty: state.bounties.bounty
 });
 
-const mapDispatchToProps = { getRefArts, editBounty, getBounty };
+const mapDispatchToProps = { editBounty, getBounty };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditBounty);

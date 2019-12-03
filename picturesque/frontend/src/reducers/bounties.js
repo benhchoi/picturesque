@@ -51,10 +51,17 @@ export default function(state = initialState, action) {
         refArt: action.payload
       };
     case GET_BOUNTY:
+      return {
+        ...state,
+        bounty: action.payload,
+        refArts: action.payload.reference_arts
+      };
     case ADD_BOUNTY:
       return {
         ...state,
-        bounty: action.payload
+        bounty: action.payload,
+        refArts: [],
+        refArt: null
       };
     case EDIT_BOUNTY:
       return {
@@ -62,7 +69,9 @@ export default function(state = initialState, action) {
         bounty: action.payload,
         bounties: state.bounties.map(bounty =>
           bounty.id === action.payload.id ? action.payload : bounty
-        )
+        ),
+        refArts: [],
+        refArt: null
       };
     case CLEAR_USER_BOUNTIES:
       return {
