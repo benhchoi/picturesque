@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import ConfirmModal from "./ConfirmModal";
 
@@ -8,19 +8,22 @@ export default class DeleteButton extends Component {
     onClick: PropTypes.func.isRequired
   };
 
-  state = {
-    confirmModal: "confirmModal"
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      confirmModal: `delete${this.props.id}`
+    };
+  }
 
   onClick = e => {
     e.preventDefault();
-    e.target.id = this.props.id;
     this.props.onClick(e);
   };
 
   render() {
     return (
-      <div>
+      <Fragment>
         <ConfirmModal
           id={this.state.confirmModal}
           message="Are you sure you want to delete?"
@@ -35,7 +38,7 @@ export default class DeleteButton extends Component {
         >
           <span className="fas fa-times" />
         </button>
-      </div>
+      </Fragment>
     );
   }
 }

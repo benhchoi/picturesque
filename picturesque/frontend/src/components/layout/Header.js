@@ -33,11 +33,24 @@ export class Header extends Component {
             >
               Create
             </Link>
+            <div className="dropdown-divider"></div>
             <Link
               className="dropdown-item"
-              to={isAuthenticated ? `/u/${user.username}` : "#"}
+              to={isAuthenticated ? `/u/${user.username}/favorites` : "#"}
             >
-              My Stuff
+              My Favorites
+            </Link>
+            <Link
+              className="dropdown-item"
+              to={isAuthenticated ? `/u/${user.username}/bounties` : "#"}
+            >
+              My Bounties
+            </Link>
+            <Link
+              className="dropdown-item"
+              to={isAuthenticated ? `/u/${user.username}/portfolios` : "#"}
+            >
+              My Portfolios
             </Link>
             <div className="dropdown-divider"></div>
             <button className="dropdown-item" onClick={this.props.logout}>

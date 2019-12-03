@@ -41,7 +41,7 @@ export default class SearchBar extends Component {
     }
 
     return (
-      <form className="form-inline my-2 my-lg-0" onSubmit={this.onSearch}>
+      <form className="form-inline my-1" onSubmit={this.onSearch}>
         <input
           className="form-control form-control-sm mr-sm-2"
           type="text"
@@ -50,7 +50,7 @@ export default class SearchBar extends Component {
           value={this.state.search}
           onChange={this.onChange}
         />
-        <button className="btn btn-sm btn-primary my-2 my-sm-0" type="submit">
+        <button className="btn btn-sm btn-primary my-1" type="submit">
           Search
         </button>
       </form>
