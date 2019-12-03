@@ -15,14 +15,40 @@ export class Bounties extends Component {
     searchBounties: PropTypes.func.isRequired
   };
 
-  state = {
-    viewModal: "viewPic",
-    imageSrc: "",
-    imageDesc: ""
-  };
+  constructor(props) {
+    super(props);
+
+    const qs = require("query-string");
+    const parsed = qs.parse(this.props.location.search);
+    const search = parsed.search == null ? "" : parsed.search;
+
+    this.state = {
+      viewModal: "viewPic",
+      imageSrc: "",
+      imageDesc: "",
+      search: search
+    };
+  }
 
   componentDidMount() {
-    this.props.getBounties();
+    if (this.state.search) {
+      this.props.searchBounties(this.state.search);
+    } else {
+      this.props.getBounties();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.location.search &&
+      prevProps.location.search !== this.props.location.search
+    ) {
+      const qs = require("query-string");
+      const parsed = qs.parse(this.props.location.search);
+      const search = parsed.search == null ? "" : parsed.search;
+      this.setState({ search });
+      this.props.searchBounties(search);
+    }
   }
 
   selectImage = e => {
@@ -46,7 +72,7 @@ export class Bounties extends Component {
             <Breadcrumbs path={this.props.location.pathname} />
           </div>
           <div className="col-auto">
-            <SearchBar searchFunc={this.props.searchBounties} />
+            <SearchBar url="/bounties" search={this.state.search} />
           </div>
         </div>
         <div className="row">

@@ -1,40 +1,59 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 
 export default class SearchBar extends Component {
   static propTypes = {
-    searchFunc: PropTypes.func.isRequired
+    url: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired
   };
 
-  state = {
-    search: ""
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      search: this.props.search,
+      redirect: false
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.redirect) {
+      this.setState({
+        redirect: false
+      });
+    }
+  }
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   onSearch = e => {
     e.preventDefault();
     const { search } = this.state;
-    this.props.searchFunc(search);
+    this.setState({ redirect: true });
   };
 
   render() {
+    if (this.state.redirect) {
+      const qs = require("query-string");
+      const stringified = qs.stringify({ search: this.state.search });
+      return <Redirect to={`${this.props.url}?${stringified}`} />;
+    }
+
     return (
-      <div>
-        <form className="form-inline my-2 my-lg-0" onSubmit={this.onSearch}>
-          <input
-            className="form-control form-control-sm mr-sm-2"
-            type="text"
-            placeholder="Search"
-            name="search"
-            value={this.state.search}
-            onChange={this.onChange}
-          />
-          <button className="btn btn-sm btn-primary my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
-      </div>
+      <form className="form-inline my-2 my-lg-0" onSubmit={this.onSearch}>
+        <input
+          className="form-control form-control-sm mr-sm-2"
+          type="text"
+          placeholder="Search"
+          name="search"
+          value={this.state.search}
+          onChange={this.onChange}
+        />
+        <button className="btn btn-sm btn-primary my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
     );
   }
 }

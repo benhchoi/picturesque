@@ -18,3 +18,4 @@ citation links:
 - fontawesome: <https://www.w3schools.com/bootstrap4/bootstrap_icons.asp>
 - using fontawesome: <https://www.w3schools.com/icons/icons_reference.asp>
 - btn-xs: <https://stackoverflow.com/questions/33911049/btn-xs-no-longer-a-valid-option-in-bootstrap-4>
+- query params: <https://stackoverflow.com/questions/43216569/how-to-get-query-parameters-in-react-router-v4>

@@ -21,12 +21,14 @@
     "@babel/preset-react": "^7.6.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "query-string": "^6.9.0",
     "webpack": "^4.41.1",
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
     "axios": "^0.19.0",
     "prop-types": "^15.7.2",
+    "query-string": "^6.9.0",
     "react": "^16.10.2",
     "react-alert": "^6.0.0",
     "react-alert-template-basic": "^1.0.0",
