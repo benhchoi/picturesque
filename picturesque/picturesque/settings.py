@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from .secrets import *
+from .secrets import (SECRET_KEY, DOMAIN, SERVER_IP_ADDRESS, POSTGRES_PASSWORD)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '167.99.113.156', 'picturesque.benjaminchoi.com']
+# DOMAIN and SERVER_IP_ADDRESS from secrets.py
+ALLOWED_HOSTS = ['localhost', DOMAIN, SERVER_IP_ADDRESS]
 
 
 # Application definition
@@ -96,7 +97,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'picturesque',
         'USER': 'django',
-        'PASSWORD': 'unchained',
+        'PASSWORD': POSTGRES_PASSWORD,
         'HOST': 'localhost',
         'PORT': '',
     }

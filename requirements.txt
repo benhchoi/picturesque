@@ -11,7 +11,7 @@ django-taggit-serializer==0.1.7
 djangorestframework==3.10.3
 gunicorn==19.9.0
 pep8==1.7.1
-Pillow==6.2.0
+Pillow==7.2.0
 psycopg2-binary==2.8.3
 pycodestyle==2.5.0
 pycparser==2.19
